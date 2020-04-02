@@ -2,6 +2,7 @@
 -- Code related to touch interactions (from Codea, not yet updated for Love2D)
 ----------------------------------------------------------------------------------------------------
 
+-- toggle booleans if clicked in areas where button / sliders are
 function love.mousepressed(x, y, button)
 
     -- print(x)
@@ -28,56 +29,36 @@ function love.mousepressed(x, y, button)
     end
 end
 
-
+-- short circuit the love.update function with boolean
 function love.mousereleased(x, y, button)
     dragging = false
 end
 
-
+-- if the mouse is being dragged after clicking, update the values of force or angle
+-- uses distance from initial click for smoothly
 function love.update(dt)
     if dragging then
+
         mouseXcurrent = love.mouse.getX()
 
-        if (mousXinitial ~= mouseXcurrent) then
+        if mousXinitial ~= mouseXcurrent then
 
-            if (draggingType == 'angle') then
+            diff = mouseXcurrent - mouseXinitial
 
-                love.graphics.rectangle('fill',20/255,60/255,80/255,1)
+            if draggingType == 'angle' then
 
                 if turn == 1 then
-                    -- mess with this for smoother control over ANGLE
-                    p1a = p1a + math.pow((mouseXcurrent - mouseXinitial)/200,3)
-
-                    -- 10,000ths place
-                    p1a = math.floor(p1a*10000)/10000
-                    love.graphics.print(p1a, 25,61)
+                    p1a = p1a + math.pow(diff/200,3)
                 elseif turn == 2 then
-                    -- mess with this for smoother control over ANGLE
-                    p2a = p2a + math.pow((mouseXcurrent-mouseXinitial)/200,3)
-
-                    -- 10,000ths place
-                    p2a = math.floor(p2a*10000)/10000
-                    love.graphics.print(p2a, 25,61)
+                    p2a = p2a + math.pow(diff/200,3)
                 end
 
             elseif draggingType == 'force' then
 
-                love.graphics.rectangle('fill',20/255,20/255,80/255,1)
-
                 if turn == 1 then
-                    -- mess with this for smoother control over FORCE
-                    p1f = p1f + math.pow((mouseXcurrent - mouseXinitial)/1000,3)
-
-                    -- 10,000ths place
-                    p1f = math.floor(p1f*10000)/10000
-                    love.graphics.print(p1f, 25,21)
+                    p1f = p1f + math.pow(diff/1000,3)
                 elseif turn == 2 then
-                    -- mess with this for smoother control over FORCE
-                    p2f = p2f + math.pow((mouseXcurrent - mouseXinitial)/1000,3)
-
-                    -- 10,000ths place
-                    p2f = math.floor(p2f*10000)/10000
-                    love.graphics.print(p2f, 25,21)
+                    p2f = p2f + math.pow(diff/1000,3)
                 end
 
             end
@@ -85,3 +66,4 @@ function love.update(dt)
         end
     end
 end
+

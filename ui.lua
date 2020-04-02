@@ -68,13 +68,13 @@ function drawUI()
     love.graphics.rectangle('fill',20,20,80,20)
     love.graphics.setColor(1, 1, 1, 1)
 
-
+    -- draw the current player's force and angle
     if turn == 1 then
-        love.graphics.print(p1f, 25,21)
-        love.graphics.print(p1a, 25,61)
+        love.graphics.printf(string.format("%.5f", p1f), 20, 22, 75, 'right')
+        love.graphics.printf(string.format("%.5f", p1a), 20, 62, 75, 'right')
     elseif turn == 2 then
-        love.graphics.print(p2f, 25,21)
-        love.graphics.print(p2a, 25,61)
+        love.graphics.printf(string.format("%.5f", p2f), 20, 22, 75, 'right')
+        love.graphics.printf(string.format("%.5f", p2a), 20, 62, 75, 'right')
     end
 
 end
