@@ -33,11 +33,11 @@ function drawUI()
 
     --draw how many lives each has
     love.graphics.setColor(1,1,0,1)
-    for i=1, player1lives do
+    for i=1, player1.lives do
         love.graphics.ellipse('fill',WIDTH/2+35+20*i, HEIGHT-32, 8, 8)
     end
 
-    for i=1, player2lives do
+    for i=1, player2.lives do
         love.graphics.ellipse('fill',WIDTH/2-35-20*i, HEIGHT-32, 8, 8)
     end
 
@@ -70,11 +70,11 @@ function drawUI()
 
     -- draw the current player's force and angle
     if turn == 1 then
-        love.graphics.printf(string.format("%.5f", player1force), 20, 22, 75, 'right')
-        love.graphics.printf(string.format("%.5f", player1angle), 20, 62, 75, 'right')
+        love.graphics.printf(string.format("%.5f", player1.force), 20, 22, 75, 'right')
+        love.graphics.printf(string.format("%.5f", player1.angle), 20, 62, 75, 'right')
     elseif turn == 2 then
-        love.graphics.printf(string.format("%.5f", player2force), 20, 22, 75, 'right')
-        love.graphics.printf(string.format("%.5f", player2angle), 20, 62, 75, 'right')
+        love.graphics.printf(string.format("%.5f", player2.force), 20, 22, 75, 'right')
+        love.graphics.printf(string.format("%.5f", player2.angle), 20, 62, 75, 'right')
     end
 
 end
@@ -83,8 +83,8 @@ end
 function drawShips()
 
     love.graphics.setColor(1, 0.6, 0.6, 1)
-    love.graphics.ellipse('fill', ship1x, ship1y, 8, 8)
-    love.graphics.ellipse('fill', ship2x, ship2y, 8, 8)
+    love.graphics.ellipse('fill', player1.x, player1.y, 8, 8)
+    love.graphics.ellipse('fill', player2.x, player2.y, 8, 8)
 
 end
 

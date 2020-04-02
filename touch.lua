@@ -48,17 +48,17 @@ function love.update(dt)
             if draggingType == 'angle' then
 
                 if turn == 1 then
-                    player1angle = player1angle + math.pow(diff/200,3)
+                    player1.angle = player1.angle + math.pow(diff/200,3)
                 elseif turn == 2 then
-                    player2angle = player2angle + math.pow(diff/200,3)
+                    player2.angle = player2.angle + math.pow(diff/200,3)
                 end
 
             elseif draggingType == 'force' then
 
                 if turn == 1 then
-                    player1force = player1force + math.pow(diff/1000,3)
+                    player1.force = player1.force + math.pow(diff/1000,3)
                 elseif turn == 2 then
-                    player2force = player2force + math.pow(diff/1000,3)
+                    player2.force = player2.force + math.pow(diff/1000,3)
                 end
 
             end

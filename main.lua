@@ -34,11 +34,11 @@ function love.load()
     drawPlanets()
 
     -- resets the location of ship1
-    shipX = ship1x
-    shipY = ship1y
+    shipX = player1.x
+    shipY = player1.y
 
-    ship1x = shipX
-    ship1y = shipY
+    player1.x = shipX
+    player1.y = shipY
 
     drawUI()
     drawShips()

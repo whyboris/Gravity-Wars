@@ -35,19 +35,21 @@ function setVariables()
     px = {}
     py = {}
 
-    -- set ship1 & ship2 locations
-    ship1x = 100
-    ship1y = 100
-    ship2x = 500
-    ship2y = 500
+    player1 = {
+        x = 100,
+        y = 100,
+        angle = 45,
+        force = 1.5,
+        lives = 3
+    }
 
-    -- player 1 and player 2 angle and force and lives
-    player1angle = 45
-    player1force = 1.5
-    player2angle = 225
-    player2force = 1.5
-    player1lives = 3
-    player2lives = 3
+    player2 = {
+        x = 500,
+        y = 500,
+        angle = 225,
+        force = 1.5,
+        lives = 3
+    }
 
     -- whose turn
     turn = 1

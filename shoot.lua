@@ -15,11 +15,11 @@ function shootBullet(f,t,b)
 
     if turn == 1 then
         -- preturb it by a bit for jitter so it's not the same
-        f = player1force + math.random()*2 + f
-        t = player1angle + math.random()*10 + t
+        f = player1.force + math.random()*2 + f
+        t = player1.angle + math.random()*10 + t
     elseif turn == 2 then
-        f = player2force + math.random()*2 + f
-        t = player2angle + math.random()*10 + t
+        f = player2.force + math.random()*2 + f
+        t = player2.angle + math.random()*10 + t
     end
 
     -- *** REDUCE THE FORCE BY some amount and reduce weight of planets by some amount
@@ -139,13 +139,13 @@ function shootBulletAgain()
     -- *** insert code to select which player *** ???
     -- or have every shot ask as an argument which player is shooting?
     if turn == 1 then
-        shipX = ship1x
-        shipY = ship1y
-        force = player1force
-        angle = player1angle
+        shipX = player1.x
+        shipY = player1.y
+        force = player1.force
+        angle = player1.angle
     elseif turn == 2 then
-        shipX = ship2x
-        shipY = ship2y
+        shipX = player2.x
+        shipY = player2.y
     end
 
     -- make bullet benign
