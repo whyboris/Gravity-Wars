@@ -11,14 +11,6 @@ require "touch"
 -- Use this function to perform your initial setup
 function love.load()
 
-    dragging = false
-    draggingType = nil -- `force` or `angle`
-    mouseXinitial = 0
-    mouseYinitial = 0
-    mouseXcurrent = 0
-    mouseYcurrent = 0
-    mdy = 0
-
     -- math.randomseed(42)  -- goes out of bounds
     math.randomseed(232) -- shot comes close to opponent // with `initialShot()` it hits the opponent
 

@@ -19,12 +19,10 @@ function love.mousepressed(x, y, button)
         end
     elseif (x > 50 and x < 410 and y > 0  and y < 50) then
         mouseXinitial = x
-        mouseYinitial = y
         draggingType = 'force'
         dragging = true
     elseif (x > 50 and x < 410 and y > 50  and y < 110)  then
         mouseXinitial = x
-        mouseYinitial = y
         draggingType = 'angle'
         dragging = true
     end
@@ -39,7 +37,6 @@ end
 function love.update(dt)
     if dragging then
         mouseXcurrent = love.mouse.getX()
-        mouseYcurrent = love.mouse.getY()
 
         if (mousXinitial ~= mouseXcurrent) then
 
