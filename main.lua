@@ -6,9 +6,18 @@ require "globals"
 require "ui"
 require "shoot"
 require "logic"
+require "touch"
 
 -- Use this function to perform your initial setup
 function love.load()
+
+    dragging = false
+    draggingType = nil -- `force` or `angle`
+    mouseXinitial = 0
+    mouseYinitial = 0
+    mouseXcurrent = 0
+    mouseYcurrent = 0
+    mdy = 0
 
     -- math.randomseed(42)  -- goes out of bounds
     math.randomseed(232) -- shot comes close to opponent // with `initialShot()` it hits the opponent
@@ -128,12 +137,6 @@ function love.draw()
 
     drawUI()
 
-    -- !!!
-    -- !!!
-    -- !!! Touch interaction code was here before
-    -- !!!
-    -- !!!
-
     -- starts dimming the playing field more aggressively
     if endOfRound == 1 then
         dimTrails()
@@ -146,15 +149,3 @@ function love.draw()
 
 end
 
-function love.mousepressed( x, y, button, istouch, presses )
-
-    print(x)
-    print(y)
-
-    if shotInProgress == 1 then
-        explode(x,y)
-    else
-        shootBulletAgain()
-    end
-
-end
