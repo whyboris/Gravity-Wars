@@ -110,7 +110,7 @@ function collisonCheck(b)
             print("you hit the opponent!")
 
             if endOfRound == false then
-                p1l = p1l - 1
+                player1lives = player1lives - 1
             end
 
             endOfRound = true
@@ -119,7 +119,7 @@ function collisonCheck(b)
             explode(x1a[b],y1a[b])
             proximity = 0
 
-            if p1l == 0 then
+            if player1lives == 0 then
                 print("GAME OVER, player 1 WON")
             end
         end
@@ -131,7 +131,7 @@ function collisonCheck(b)
             print("you hit yourself!")
 
             if endOfRound == false then
-                p2l = p2l - 1
+                player2lives = player2lives - 1
             end
 
             endOfRound = true
@@ -139,7 +139,7 @@ function collisonCheck(b)
             love.graphics.ellipse('line',ship1x,ship1y,15,15)
             explode(x1a[b],y1a[b])
             proximity2 = 0
-            if p2l == 0 then
+            if player2lives == 0 then
                 print("GAME OVER, player 2 WON")
             end
         end

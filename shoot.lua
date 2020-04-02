@@ -15,11 +15,11 @@ function shootBullet(f,t,b)
 
     if turn == 1 then
         -- preturb it by a bit for jitter so it's not the same
-        f = p1f + math.random()*2 + f
-        t = p1a + math.random()*10 + t
+        f = player1force + math.random()*2 + f
+        t = player1angle + math.random()*10 + t
     elseif turn == 2 then
-        f = p2f + math.random()*2 + f
-        t = p2a + math.random()*10 + t
+        f = player2force + math.random()*2 + f
+        t = player2angle + math.random()*10 + t
     end
 
     -- *** REDUCE THE FORCE BY some amount and reduce weight of planets by some amount
@@ -141,8 +141,8 @@ function shootBulletAgain()
     if turn == 1 then
         shipX = ship1x
         shipY = ship1y
-        force = p1f
-        angle = p1a
+        force = player1force
+        angle = player1angle
     elseif turn == 2 then
         shipX = ship2x
         shipY = ship2y

@@ -42,12 +42,12 @@ function setVariables()
     ship2y = 500
 
     -- player 1 and player 2 angle and force and lives
-    p1a = 45
-    p1f = 1.5
-    p2a = 225
-    p2f = 1.5
-    p1l = 3
-    p2l = 3
+    player1angle = 45
+    player1force = 1.5
+    player2angle = 225
+    player2force = 1.5
+    player1lives = 3
+    player2lives = 3
 
     -- whose turn
     turn = 1
