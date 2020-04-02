@@ -76,14 +76,11 @@ function setVariables()
     vfx = 0 -- only used temporarily during shot
     vfy = 0
 
-    -- first touch x location to store temporarily
-    firstTouch = 0
-
     -- throwaway variable
     temp = 0
 
     -- if end of round = 1 it restarts the game after all the bullets end their path
-    endOfRound = 0
+    endOfRound = false
 
     -- kaleidoscope mode colors for shot trails
     lineColor1 = 1

@@ -109,11 +109,11 @@ function collisonCheck(b)
         if(math.sqrt(math.pow(s2x-x1a[b],2)+math.pow(s2y-y1a[b],2))) < 10 then
             print("you hit the opponent!")
 
-            if endOfRound == 0 then
+            if endOfRound == false then
                 p1l = p1l - 1
             end
 
-            endOfRound = 1
+            endOfRound = true
             -- explode this location !!!
             love.graphics.ellipse('line',s2x,s2y,15,15)
             explode(x1a[b],y1a[b])
@@ -130,11 +130,11 @@ function collisonCheck(b)
         if(math.sqrt(math.pow(s1x-x1a[b],2)+math.pow(s1y-y1a[b],2))) < 10 then
             print("you hit yourself!")
 
-            if endOfRound == 0 then
+            if endOfRound == false then
                 p2l = p2l - 1
             end
 
-            endOfRound = 1
+            endOfRound = true
             -- explode this location !!!
             love.graphics.ellipse('line',s1x,s1y,15,15)
             explode(x1a[b],y1a[b])

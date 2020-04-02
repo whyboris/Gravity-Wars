@@ -58,8 +58,8 @@ function love.draw()
     -- love.graphics.setBackgroundColor(0,0,50/255)
 
 
-    if endOfRound == 1 and shotInProgress == false then
-        endOfRound = 0
+    if endOfRound == true and shotInProgress == false then
+        endOfRound = false
         newGame()
     end
 
@@ -130,7 +130,7 @@ function love.draw()
     drawUI()
 
     -- starts dimming the playing field more aggressively
-    if endOfRound == 1 then
+    if endOfRound == true then
         dimTrails()
         -- love.graphics.setColor(0,0,0,1)
         -- love.graphics.rectangle('fill',-1,-1,WIDTH+5,HEIGHT+5)
