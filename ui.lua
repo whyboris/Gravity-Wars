@@ -83,8 +83,8 @@ end
 function drawShips()
 
     love.graphics.setColor(1, 0.6, 0.6, 1)
-    love.graphics.ellipse('fill', s1x, s1y, 8, 8)
-    love.graphics.ellipse('fill', s2x, s2y, 8, 8)
+    love.graphics.ellipse('fill', ship1x, ship1y, 8, 8)
+    love.graphics.ellipse('fill', ship2x, ship2y, 8, 8)
 
 end
 

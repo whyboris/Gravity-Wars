@@ -44,10 +44,10 @@ function createPlanets()
     --py[1] = HEIGHT/2
 
     -- reposition ships
-    s1x = math.random(200,WIDTH/2-100)
-    s1y = math.random(200,HEIGHT-200)
-    s2x = math.random(WIDTH/2+100,WIDTH-200)
-    s2y = math.random(200,HEIGHT-200)
+    ship1x = math.random(200,WIDTH/2-100)
+    ship1y = math.random(200,HEIGHT-200)
+    ship2x = math.random(WIDTH/2+100,WIDTH-200)
+    ship2y = math.random(200,HEIGHT-200)
 
 
     -- TODO - compute distance with square roots - not just x & y distance
@@ -60,9 +60,9 @@ function createPlanets()
                 -- do nothing
             elseif math.abs(px[i]-px[j]) < 40 and math.abs(py[i]-py[j]) < 40 then
                 createPlanets()
-            elseif math.abs(px[i]-s1x) < 90 and math.abs(py[i]-s1y) < 90 then
+            elseif math.abs(px[i]-ship1x) < 90 and math.abs(py[i]-ship1y) < 90 then
                 createPlanets()
-            elseif math.abs(px[i]-s2x) < 90 and math.abs(py[i]-s2y) < 90 then
+            elseif math.abs(px[i]-ship2x) < 90 and math.abs(py[i]-ship2y) < 90 then
                 createPlanets()
             end
         end
@@ -106,7 +106,7 @@ function collisonCheck(b)
     -- check if you hit opponent (num of bullets must affect benign,
     -- because with too many bullets it kills itself because benign is too high
     if benign > numOfBullets*50 then
-        if(math.sqrt(math.pow(s2x-x1a[b],2)+math.pow(s2y-y1a[b],2))) < 10 then
+        if(math.sqrt(math.pow(ship2x-x1a[b],2)+math.pow(ship2y-y1a[b],2))) < 10 then
             print("you hit the opponent!")
 
             if endOfRound == false then
@@ -115,7 +115,7 @@ function collisonCheck(b)
 
             endOfRound = true
             -- explode this location !!!
-            love.graphics.ellipse('line',s2x,s2y,15,15)
+            love.graphics.ellipse('line',ship2x,ship2y,15,15)
             explode(x1a[b],y1a[b])
             proximity = 0
 
@@ -127,7 +127,7 @@ function collisonCheck(b)
 
     -- check if you hit yourself
     if benign > numOfBullets*50 then
-        if(math.sqrt(math.pow(s1x-x1a[b],2)+math.pow(s1y-y1a[b],2))) < 10 then
+        if(math.sqrt(math.pow(ship1x-x1a[b],2)+math.pow(ship1y-y1a[b],2))) < 10 then
             print("you hit yourself!")
 
             if endOfRound == false then
@@ -136,7 +136,7 @@ function collisonCheck(b)
 
             endOfRound = true
             -- explode this location !!!
-            love.graphics.ellipse('line',s1x,s1y,15,15)
+            love.graphics.ellipse('line',ship1x,ship1y,15,15)
             explode(x1a[b],y1a[b])
             proximity2 = 0
             if p2l == 0 then
@@ -151,8 +151,8 @@ function collisonCheck(b)
 
     -- check how close you are to the opponent; updates proximity
     if turn == 1 then
-        if proximity > math.sqrt(math.pow(s2x-x1a[b],2)+math.pow(s2y-y1a[b],2)) then
-            proximity = math.sqrt(math.pow(s2x-x1a[b],2)+math.pow(s2y-y1a[b],2))
+        if proximity > math.sqrt(math.pow(ship2x-x1a[b],2)+math.pow(ship2y-y1a[b],2)) then
+            proximity = math.sqrt(math.pow(ship2x-x1a[b],2)+math.pow(ship2y-y1a[b],2))
             --print("closest we got to ss2 is ", proximity)
             --print("turn A", turn)
         end
@@ -163,8 +163,8 @@ function collisonCheck(b)
     -- so that the health meter doesn't freak out as soon as you shoot your bullet
     -- should be disabled on your turn
     if turn == 2 then
-        if proximity2 > math.sqrt(math.pow(s1x-x1a[b],2)+math.pow(s1y-y1a[b],2)) then
-            proximity2 = math.sqrt(math.pow(s1x-x1a[b],2)+math.pow(s1y-y1a[b],2))
+        if proximity2 > math.sqrt(math.pow(ship1x-x1a[b],2)+math.pow(ship1y-y1a[b],2)) then
+            proximity2 = math.sqrt(math.pow(ship1x-x1a[b],2)+math.pow(ship1y-y1a[b],2))
             --print("closest we got to ss1 is ", proximity)
             --print("turn B", turn)
         end

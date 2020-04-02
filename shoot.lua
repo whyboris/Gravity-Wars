@@ -139,13 +139,13 @@ function shootBulletAgain()
     -- *** insert code to select which player *** ???
     -- or have every shot ask as an argument which player is shooting?
     if turn == 1 then
-        shipX = s1x
-        shipY = s1y
+        shipX = ship1x
+        shipY = ship1y
         force = p1f
         angle = p1a
     elseif turn == 2 then
-        shipX = s2x
-        shipY = s2y
+        shipX = ship2x
+        shipY = ship2y
     end
 
     -- make bullet benign

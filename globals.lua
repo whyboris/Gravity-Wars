@@ -35,11 +35,11 @@ function setVariables()
     px = {}
     py = {}
 
-    -- set ship1 ship2 locations
-    s1x = 100
-    s1y = 100
-    s2x = 500
-    s2y = 500
+    -- set ship1 & ship2 locations
+    ship1x = 100
+    ship1y = 100
+    ship2x = 500
+    ship2y = 500
 
     -- player 1 and player 2 angle and force and lives
     p1a = 45
