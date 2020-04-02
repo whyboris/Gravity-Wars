@@ -7,6 +7,12 @@ function setVariables()
     WIDTH = 1000
     HEIGHT = 800
 
+    -- Mouse click interactions
+    dragging = false
+    draggingType = nil -- `force` or `angle`
+    mouseXinitial = 0
+    mouseXcurrent = 0
+
     -- FUN kaleidoscope time!
     -- colorMode = 1
 

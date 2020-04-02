@@ -6,6 +6,7 @@ require "globals"
 require "ui"
 require "shoot"
 require "logic"
+require "touch"
 
 -- Use this function to perform your initial setup
 function love.load()
@@ -128,12 +129,6 @@ function love.draw()
 
     drawUI()
 
-    -- !!!
-    -- !!!
-    -- !!! Touch interaction code was here before
-    -- !!!
-    -- !!!
-
     -- starts dimming the playing field more aggressively
     if endOfRound == 1 then
         dimTrails()
@@ -146,15 +141,3 @@ function love.draw()
 
 end
 
-function love.mousepressed( x, y, button, istouch, presses )
-
-    print(x)
-    print(y)
-
-    if shotInProgress == 1 then
-        explode(x,y)
-    else
-        shootBulletAgain()
-    end
-
-end
