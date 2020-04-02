@@ -43,22 +43,22 @@ function drawUI()
 
 
     -- right health bar
-    love.graphics.setColor((255-proximity*2.55)/255, 1, 0, 1)
+    love.graphics.setColor((255-player1.health*2.55)/255, 1, 0, 1)
     love.graphics.rectangle('fill',WIDTH/2+50,HEIGHT-20,300,10)
 
-    if proximity<100 then
-        love.graphics.setColor(223/255, (45+proximity)/255, (45+proximity)/255, 1)
-        love.graphics.rectangle('fill',(WIDTH/2+50)+300-300*((100-proximity)/100),HEIGHT-20,300-300*((proximity)/100),10)
+    if player1.health<100 then
+        love.graphics.setColor(223/255, (45+player1.health)/255, (45+player1.health)/255, 1)
+        love.graphics.rectangle('fill',(WIDTH/2+50)+300-300*((100-player1.health)/100),HEIGHT-20,300-300*((player1.health)/100),10)
     end
 
 
     -- left health bar
-    love.graphics.setColor((255-proximity2*2.55)/255, 1, 0, 1)
+    love.graphics.setColor((255-player2.health*2.55)/255, 1, 0, 1)
     love.graphics.rectangle('fill',WIDTH/2-350,HEIGHT-20,300,10)
 
-    if proximity2<100 then
-        love.graphics.setColor(224/255, (45+proximity2)/255, (45+proximity2)/255, 1)
-        love.graphics.rectangle('fill',(WIDTH/2-350),HEIGHT-20,300-300*((proximity2)/100),10)
+    if player2.health<100 then
+        love.graphics.setColor(224/255, (45+player2.health)/255, (45+player2.health)/255, 1)
+        love.graphics.rectangle('fill',(WIDTH/2-350),HEIGHT-20,300-300*((player2.health)/100),10)
     end
 
 

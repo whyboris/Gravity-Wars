@@ -25,10 +25,6 @@ function setVariables()
     -- set number of Planets
     numOfPlanets = 7
 
-    -- proximity counter
-    proximity = 100
-    proximity2 = 100
-
     -- setup mass, radius, planet coordinates, force from each planet to bullet
     m = {}
     r = {}
@@ -40,7 +36,8 @@ function setVariables()
         y = 100,
         angle = 45,
         force = 1.5,
-        lives = 3
+        lives = 3,
+        health = 100
     }
 
     player2 = {
@@ -48,7 +45,8 @@ function setVariables()
         y = 500,
         angle = 225,
         force = 1.5,
-        lives = 3
+        lives = 3,
+        health = 100
     }
 
     -- whose turn

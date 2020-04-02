@@ -14,8 +14,8 @@ function newGame()
     drawPlanets()
     drawShips()
 
-    proximity = 100
-    proximity2 = 100
+    player1.health = 100
+    player2.health = 100
 
     print("New Game Started")
 
@@ -117,7 +117,7 @@ function collisonCheck(b)
             -- explode this location !!!
             love.graphics.ellipse('line',player2.x,player2.y,15,15)
             explode(x1a[b],y1a[b])
-            proximity = 0
+            player1.health = 0
 
             if player1.lives == 0 then
                 print("GAME OVER, player 1 WON")
@@ -138,7 +138,7 @@ function collisonCheck(b)
             -- explode this location !!!
             love.graphics.ellipse('line',player1.x,player1.y,15,15)
             explode(x1a[b],y1a[b])
-            proximity2 = 0
+            player2.health = 0
             if player2.lives == 0 then
                 print("GAME OVER, player 2 WON")
             end
@@ -147,25 +147,25 @@ function collisonCheck(b)
 
 
     -- *** MAYBE EDIT THIS - NEED TO ALTERNATE WHEN TO UPDATE DISTANCES
-    -- *** NEED *** to update proximity only for opponent, not for self !!!
+    -- *** NEED *** to update player1.health only for opponent, not for self !!!
 
-    -- check how close you are to the opponent; updates proximity
+    -- check how close you are to the opponent; updates player1.health
     if turn == 1 then
-        if proximity > math.sqrt(math.pow(player2.x-x1a[b],2)+math.pow(player2.y-y1a[b],2)) then
-            proximity = math.sqrt(math.pow(player2.x-x1a[b],2)+math.pow(player2.y-y1a[b],2))
-            --print("closest we got to ss2 is ", proximity)
+        if player1.health > math.sqrt(math.pow(player2.x-x1a[b],2)+math.pow(player2.y-y1a[b],2)) then
+            player1.health = math.sqrt(math.pow(player2.x-x1a[b],2)+math.pow(player2.y-y1a[b],2))
+            --print("closest we got to ss2 is ", player1.health)
             --print("turn A", turn)
         end
     end
 
-    -- check how close you are to the opponent; updates proximity2
+    -- check how close you are to the opponent; updates player2.health
     -- edit this code for later - at the moment needs to use "benign"
     -- so that the health meter doesn't freak out as soon as you shoot your bullet
     -- should be disabled on your turn
     if turn == 2 then
-        if proximity2 > math.sqrt(math.pow(player1.x-x1a[b],2)+math.pow(player1.y-y1a[b],2)) then
-            proximity2 = math.sqrt(math.pow(player1.x-x1a[b],2)+math.pow(player1.y-y1a[b],2))
-            --print("closest we got to ss1 is ", proximity)
+        if player2.health > math.sqrt(math.pow(player1.x-x1a[b],2)+math.pow(player1.y-y1a[b],2)) then
+            player2.health = math.sqrt(math.pow(player1.x-x1a[b],2)+math.pow(player1.y-y1a[b],2))
+            --print("closest we got to ss1 is ", player1.health)
             --print("turn B", turn)
         end
     end
