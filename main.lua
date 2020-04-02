@@ -58,7 +58,7 @@ function love.draw()
     -- love.graphics.setBackgroundColor(0,0,50/255)
 
 
-    if endOfRound == 1 and shotInProgress == 0 then
+    if endOfRound == 1 and shotInProgress == false then
         endOfRound = 0
         newGame()
     end
@@ -84,7 +84,7 @@ function love.draw()
 
 
     -- only draw things if shot is in progress
-    if shotInProgress == 1 then
+    if shotInProgress == true then
         for i=1, numOfBullets do
             drawShot(i)
         end
@@ -95,7 +95,7 @@ function love.draw()
     end
 
 
-    if shotInProgress == 1 then
+    if shotInProgress == true then
 
         -- if the x location of each shot == 0 then end the turn
         progressCheck = 0
@@ -106,7 +106,7 @@ function love.draw()
 
         if progressCheck == 0 then
             print("all shots have finished")
-            shotInProgress = 0
+            shotInProgress = false
             if turn == 1 then
                 turn = 2
             elseif turn == 2 then

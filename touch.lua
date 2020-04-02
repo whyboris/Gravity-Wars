@@ -9,13 +9,13 @@ function love.mousepressed(x, y, button)
     -- print(y)
 
     --[[ fun times
-    if shotInProgress == 1 then
+    if shotInProgress == true then
         explode(x,y)
     end
     ]]--
 
     if (x > (WIDTH - 100) and y < 100) then
-        if shotInProgress ~= 1 then
+        if shotInProgress == false then
             shootBulletAgain()
         end
     elseif (x > 50 and x < 410 and y > 0  and y < 50) then

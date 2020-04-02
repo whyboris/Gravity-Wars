@@ -75,7 +75,7 @@ end
 -- dims trails after every collision
 function collisonCheck(b)
 
-    -- insert code that will set shotInProgress = 0 if all bullets are gone and end the turn with it
+    -- insert code that will set shotInProgress = false if all bullets are gone and end the turn with it
 
     -- whenever the bullet hits the planet - remove from drawing & computing
     for i=1,numOfPlanets do

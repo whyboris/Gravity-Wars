@@ -134,7 +134,7 @@ end
 function shootBulletAgain()
 
     print("Whose is shooting? Player ", turn)
-    shotInProgress = 1
+    shotInProgress = true
 
     -- *** insert code to select which player *** ???
     -- or have every shot ask as an argument which player is shooting?

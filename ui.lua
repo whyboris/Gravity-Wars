@@ -22,10 +22,10 @@ function drawUI()
 
 
     -- shoot BUTTON rectangle -- change states while shot in progress
-    if shotInProgress == 1 then
+    if shotInProgress == true then
         love.graphics.setColor(0.5,0,0,1)
         love.graphics.ellipse('fill',WIDTH-50,50,30,30)
-    elseif shotInProgress == 0 then
+    else
         love.graphics.setColor(16/255,178/255,197/255,1)
         love.graphics.ellipse('fill',WIDTH-50,50,30,30)
     end
