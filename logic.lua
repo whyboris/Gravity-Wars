@@ -4,15 +4,14 @@
 
 function newGame()
 
-    love.graphics.setCanvas(canvas)
-        love.graphics.clear()
-    love.graphics.setCanvas()
-
     setInitialPositions()
 
-    drawPlanets()
-    drawShips()
-    drawUI()
+    love.graphics.setCanvas(canvas)
+        love.graphics.clear()
+        drawPlanets()
+        drawShips()
+        drawUI()
+    love.graphics.setCanvas()
 
     player1.health = 100
     player2.health = 100
@@ -162,6 +161,9 @@ function collisonCheck(b)
     if turn == 1 then
         if player1.health > math.sqrt(math.pow(player2.x-x1a[b],2)+math.pow(player2.y-y1a[b],2)) then
             player1.health = math.sqrt(math.pow(player2.x-x1a[b],2)+math.pow(player2.y-y1a[b],2))
+            love.graphics.setCanvas(canvas)
+                drawUI()
+            love.graphics.setCanvas()
             --print("closest we got to ss2 is ", player1.health)
             --print("turn A", turn)
         end
@@ -174,6 +176,9 @@ function collisonCheck(b)
     if turn == 2 then
         if player2.health > math.sqrt(math.pow(player1.x-x1a[b],2)+math.pow(player1.y-y1a[b],2)) then
             player2.health = math.sqrt(math.pow(player1.x-x1a[b],2)+math.pow(player1.y-y1a[b],2))
+            love.graphics.setCanvas(canvas)
+                drawUI()
+            love.graphics.setCanvas()
             --print("closest we got to ss1 is ", player1.health)
             --print("turn B", turn)
         end

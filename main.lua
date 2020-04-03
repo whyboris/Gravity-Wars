@@ -101,22 +101,19 @@ function love.draw()
         if progressCheck == 0 then
             print("all shots have finished")
 
-            -- dimTrails()
-
             shotInProgress = false
             if turn == 1 then
                 turn = 2
             elseif turn == 2 then
                 turn = 1
             end
+
+            love.graphics.setCanvas(canvas)
+                drawUI()
+            love.graphics.setCanvas()
         end
 
     end
-
-
-    drawPlanets()
-
-    drawShips()
 
     -- this code here WILL dim the trails continuously when explosion occurs
     -- works too fast so I can slow it down by dimming every 5th frame (temp int)
@@ -124,7 +121,7 @@ function love.draw()
         dimTrails()
     end
 
-    drawUI()
+    -- drawUI() -- maybe do not draw continuously ?
 
     -- starts dimming the playing field more aggressively
     if endOfRound == true then

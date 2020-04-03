@@ -63,6 +63,10 @@ function love.update(dt)
 
             end
 
+            love.graphics.setCanvas(canvas)
+                drawUI()
+            love.graphics.setCanvas()
+
         end
     end
 end

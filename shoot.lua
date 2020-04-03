@@ -171,6 +171,10 @@ function shootBulletAgain()
         end
     end
 
+    love.graphics.setCanvas(canvas)
+        drawUI()
+    love.graphics.setCanvas()
+
     -- this code changed the turn too soon and made the health bar act improperly
     -- if turn == 1 then
     --     --turn = 2
