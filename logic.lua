@@ -21,27 +21,33 @@ function newGame()
 
 end
 
--- Randomize placement of planets; check for overlap (does not draw them!)
+-- Randomize placement of planets
+-- check for overlap, retry if check fails
+-- function does not draw planets
 function createPlanets()
 
     print('randomizing planets attempt')
 
+    allPlanets = {} -- reset whatever we had before first
+
     -- include parameters for max and min planet locations
 
-   for i=1, numOfPlanets do
-       px[i] = math.random(100,WIDTH-100)
-       py[i] = math.random(150,HEIGHT-250)
-       r[i] = math.random(15,50)
+    -- TODO: experiment with mass
+    -- having the mass depend on radius is less fun - small planets stop mattering
+    -- mass = (math.pow(allPlanets[i].r,3)/25) -- MASS depends on radius^3 *** this affects speed of drawing
 
-       -- I should play with mass ****
-       m[i] = math.random(10,50)*10
-       -- having the mass depend on radius is less fun - small planets stop mattering
-       --m[i] = (math.pow(r[i],3)/25) -- MASS depends on radius^3 *** this affects speed of drawing
+    for i=1, numOfPlanets do
+        allPlanets[i] = {
+            x = math.random(100,WIDTH-100),
+            y = math.random(150,HEIGHT-250),
+            r = math.random(15,50),
+            mass = math.random(10,50)*10
+        }
     end
 
-    -- makes a planet dead center
-    --px[1] = WIDTH/2
-    --py[1] = HEIGHT/2
+    -- make a planet dead center:
+    -- allPlanets[1].x = WIDTH/2
+    -- allPlanets[1].y = HEIGHT/2
 
     -- reposition ships
     player1.x = math.random(200,WIDTH/2-100)
@@ -56,13 +62,13 @@ function createPlanets()
     -- space them out by 50 px at least
     for i=1, numOfPlanets do
         for j=1, numOfPlanets do
-            if px[i] == px[j] and py[i] == py[j] then
+            if allPlanets[i].x == allPlanets[j].x and allPlanets[i].y == allPlanets[j].y then
                 -- do nothing
-            elseif math.abs(px[i]-px[j]) < 40 and math.abs(py[i]-py[j]) < 40 then
+            elseif math.abs(allPlanets[i].x-allPlanets[j].x) < 40 and math.abs(allPlanets[i].y-allPlanets[j].y) < 40 then
                 createPlanets()
-            elseif math.abs(px[i]-player1.x) < 90 and math.abs(py[i]-player1.y) < 90 then
+            elseif math.abs(allPlanets[i].x-player1.x) < 90 and math.abs(allPlanets[i].y-player1.y) < 90 then
                 createPlanets()
-            elseif math.abs(px[i]-player2.x) < 90 and math.abs(py[i]-player2.y) < 90 then
+            elseif math.abs(allPlanets[i].x-player2.x) < 90 and math.abs(allPlanets[i].y-player2.y) < 90 then
                 createPlanets()
             end
         end
@@ -80,7 +86,7 @@ function collisonCheck(b)
     -- whenever the bullet hits the planet - remove from drawing & computing
     for i=1,numOfPlanets do
 
-        if(math.sqrt(math.pow(px[i]-x1a[b],2)+math.pow(py[i]-y1a[b],2))) < r[i] then
+        if(math.sqrt(math.pow(allPlanets[i].x-x1a[b],2)+math.pow(allPlanets[i].y-y1a[b],2))) < allPlanets[i].r then
 
             -- remove the bullet from the playing field
             -- as long as it's placed outside the cutoff set in the drawShot()
@@ -216,11 +222,11 @@ function drawShot(b)
         -- (a)
         -- calculate force of planet on x1 and y1
         for i=1, numOfPlanets do
-            fpx[i] = (px[i] - x1a[b]) / (math.pow( math.sqrt(((px[i] - x1a[b]) * (px[i] - x1a[b])) + ((py[i] - y1a[b]) * (py[i] - y1a[b]))), 3));
+            fpx[i] = (allPlanets[i].x - x1a[b]) / (math.pow( math.sqrt(((allPlanets[i].x - x1a[b]) * (allPlanets[i].x - x1a[b])) + ((allPlanets[i].y - y1a[b]) * (allPlanets[i].y - y1a[b]))), 3));
         end
 
         for i=1, numOfPlanets do
-            fpy[i] = (py[i] - y1a[b]) / (math.pow( math.sqrt(((px[i] - x1a[b]) * (px[i] - x1a[b])) + ((py[i] - y1a[b]) * (py[i] - y1a[b]))), 3));
+            fpy[i] = (allPlanets[i].y - y1a[b]) / (math.pow( math.sqrt(((allPlanets[i].x - x1a[b]) * (allPlanets[i].x - x1a[b])) + ((allPlanets[i].y - y1a[b]) * (allPlanets[i].y - y1a[b]))), 3));
         end
 
         -- reset velocity
@@ -230,11 +236,11 @@ function drawShot(b)
         -- (b)
         -- for each planet add all forces multiplied by gravity of each planet
         for i=1, numOfPlanets do
-            vfx = vfx + fpx[i] * m[i]
+            vfx = vfx + fpx[i] * allPlanets[i].mass
         end
 
         for i=1, numOfPlanets do
-            vfy = vfy + fpy[i] * m[i]
+            vfy = vfy + fpy[i] * allPlanets[i].mass
         end
 
         -- (c)

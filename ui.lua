@@ -124,7 +124,7 @@ function drawPlanets()
     love.graphics.setColor(217/255, 160/255, 59/255, 1)
 
     for i=1, numOfPlanets do
-        love.graphics.ellipse('line', px[i], py[i], r[i], r[i])
+        love.graphics.ellipse('line', allPlanets[i].x, allPlanets[i].y, allPlanets[i].r, allPlanets[i].r)
     end
 
     drawUI()

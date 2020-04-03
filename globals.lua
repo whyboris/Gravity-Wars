@@ -25,11 +25,7 @@ function setVariables()
     -- set number of Planets
     numOfPlanets = 7
 
-    -- setup mass, radius, planet coordinates, force from each planet to bullet
-    m = {}
-    r = {}
-    px = {}
-    py = {}
+    allPlanets = {} -- each planet will have `mass`, `r`, `x`, `y`
 
     player1 = {
         x = 100,
