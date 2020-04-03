@@ -66,13 +66,18 @@ function createPlanets()
                 -- do nothing
             elseif math.abs(allPlanets[i].x-allPlanets[j].x) < 40 and math.abs(allPlanets[i].y-allPlanets[j].y) < 40 then
                 createPlanets()
+                goto done
             elseif math.abs(allPlanets[i].x-player1.x) < 90 and math.abs(allPlanets[i].y-player1.y) < 90 then
                 createPlanets()
+                goto done
             elseif math.abs(allPlanets[i].x-player2.x) < 90 and math.abs(allPlanets[i].y-player2.y) < 90 then
                 createPlanets()
+                goto done
             end
         end
     end
+
+    ::done::
 
 end
 
