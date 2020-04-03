@@ -62,10 +62,6 @@ function setVariables()
     -- benign while it's less than 10, for example (see collision check)
     benign = 0
 
-    -- array to store forces from each planet to each shot (temp use always)
-    fpx = {}
-    fpy = {}
-
     -- array used to store location of each shot - x location, y location.
     x1a = {}
     y1a = {}

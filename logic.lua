@@ -174,24 +174,46 @@ end
 
 
 
--- **** MUST MESS WITH THIS - increase resolution of the shot and speed of the shot ***********
--- *** planets with all the small radii allow bullets to pass through - because the rosolution is LOW ***
+-- TODO: figure out a sensible default for resolution of the shot and speed of the shot
+-- warning: planets with all the small radii may allow bullets to pass through
+--          because the shot rosolution is LOW
 
--- THE MOST IMPORTANT FUNCTION - draws the lines for the shot "b" where b is the shot name
+-- TODO: allow shot to be outside the border by at least a little bit
+-- TODO: include code so it doesn't do the calculation if the shot is too far from border
+--       if shot is within bounds of the screen, draw it
+
+
+--[[
+
+THE MOST IMPORTANT FUNCTION - draws the lines for the shot "b" where b is the shot name
+
+1) if shot is outside some boundary, discard it
+2) if the shot is outside drawing area, compute, but don't draw (TODO: this is not implemented yet)
+3) if the shot is within screen:
+    a) compute x and y components from each planet on the current bullet (store in fpx & fpy variables)
+    b) sum up all the forces into a single vfx & vfy
+    c) add final force to bullet's initial force
+    d) draw the small segment
+    e) update bullet's 'initial' velocity for next iteration
+
+--]]
 function drawShot(b)
 
-
+    -- (1)
     -- set the shot outside if it hits outside the play border
     if x1a[b]>WIDTH-10 or x1a[b]<10 or y1a[b]>WIDTH-10 or y1a[b]<10 then
         x1a[b] = 0
         y1a[b] = 0
     end
 
-
-    -- include code so it doesn't do the calculation if the shot is too far
-    -- bar is low at the moment
+    -- (3)
     if x1a[b]<WIDTH-10 and x1a[b]>10 and y1a[b]<WIDTH-10 and y1a[b]>10 then
 
+        -- array to store forces from each planet to each shot (temp use always)
+        fpx = {}
+        fpy = {}
+
+        -- (a)
         -- calculate force of planet on x1 and y1
         for i=1, numOfPlanets do
             fpx[i] = (px[i] - x1a[b]) / (math.pow( math.sqrt(((px[i] - x1a[b]) * (px[i] - x1a[b])) + ((py[i] - y1a[b]) * (py[i] - y1a[b]))), 3));
@@ -205,6 +227,7 @@ function drawShot(b)
         vfx = 0
         vfy = 0
 
+        -- (b)
         -- for each planet add all forces multiplied by gravity of each planet
         for i=1, numOfPlanets do
             vfx = vfx + fpx[i] * m[i]
@@ -214,6 +237,7 @@ function drawShot(b)
             vfy = vfy + fpy[i] * m[i]
         end
 
+        -- (c)
         -- add initiav velocity to the final velocity
         vfx = vfx + vix[b]
         vfy = vfy + viy[b]
@@ -222,11 +246,13 @@ function drawShot(b)
         vix[b] = vfx
         viy[b] = vfy
 
+        -- (d)
         -- Draw shot to canvas
         love.graphics.setCanvas(canvas)                                       -- direct drawing operations to the canvas
             love.graphics.line(x1a[b],y1a[b],x1a[b]+vfx,y1a[b]+vfy)                                    -- draw to canvas
         love.graphics.setCanvas()                                                -- re-enable drawing to the main screen
 
+        -- (e)
         x1a[b] = x1a[b] + vfx
         y1a[b] = y1a[b] + vfy
 
