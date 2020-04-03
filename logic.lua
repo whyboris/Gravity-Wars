@@ -8,11 +8,11 @@ function newGame()
         love.graphics.clear()
     love.graphics.setCanvas()
 
-    createPlanets()
+    setInitialPositions()
 
-    drawUI()
     drawPlanets()
     drawShips()
+    drawUI()
 
     player1.health = 100
     player2.health = 100
@@ -21,10 +21,9 @@ function newGame()
 
 end
 
--- Randomize placement of planets
+-- Randomize placement of planets & ships
 -- check for overlap, retry if check fails
--- function does not draw planets
-function createPlanets()
+function setInitialPositions()
 
     print('randomizing planets attempt')
 
@@ -45,15 +44,11 @@ function createPlanets()
         }
     end
 
-    -- make a planet dead center:
-    -- allPlanets[1].x = WIDTH/2
-    -- allPlanets[1].y = HEIGHT/2
-
     -- reposition ships
-    player1.x = math.random(200,WIDTH/2-100)
-    player1.y = math.random(200,HEIGHT-200)
-    player2.x = math.random(WIDTH/2+100,WIDTH-200)
-    player2.y = math.random(200,HEIGHT-200)
+    player1.x = math.random(200,         WIDTH/2-100)
+    player1.y = math.random(200,         HEIGHT-200)
+    player2.x = math.random(WIDTH/2+100, WIDTH-200)
+    player2.y = math.random(200,         HEIGHT-200)
 
 
     -- TODO - compute distance with square roots - not just x & y distance
@@ -65,13 +60,13 @@ function createPlanets()
             if allPlanets[i].x == allPlanets[j].x and allPlanets[i].y == allPlanets[j].y then
                 -- do nothing
             elseif math.abs(allPlanets[i].x-allPlanets[j].x) < 40 and math.abs(allPlanets[i].y-allPlanets[j].y) < 40 then
-                createPlanets()
+                setInitialPositions()
                 goto done
             elseif math.abs(allPlanets[i].x-player1.x) < 90 and math.abs(allPlanets[i].y-player1.y) < 90 then
-                createPlanets()
+                setInitialPositions()
                 goto done
             elseif math.abs(allPlanets[i].x-player2.x) < 90 and math.abs(allPlanets[i].y-player2.y) < 90 then
-                createPlanets()
+                setInitialPositions()
                 goto done
             end
         end
@@ -102,7 +97,10 @@ function collisonCheck(b)
             viy[b] = 0
 
             -- this dims the trails on every collision -- probably should disable
-            dimTrails()
+            -- dimTrails()
+            love.graphics.setCanvas(canvas)
+                drawPlanets() -- draw planets because a collision overlaps with a planet :(
+            love.graphics.setCanvas()
         end
     end
 
@@ -126,7 +124,7 @@ function collisonCheck(b)
 
             endOfRound = true
             -- explode this location !!!
-            love.graphics.ellipse('line',player2.x,player2.y,15,15)
+            love.graphics.ellipse('line', player2.x, player2.y, 15, 15)
             explode(x1a[b],y1a[b])
             player1.health = 0
 
@@ -147,7 +145,7 @@ function collisonCheck(b)
 
             endOfRound = true
             -- explode this location !!!
-            love.graphics.ellipse('line',player1.x,player1.y,15,15)
+            love.graphics.ellipse('line', player1.x, player1.y, 15, 15)
             explode(x1a[b],y1a[b])
             player2.health = 0
             if player2.lives == 0 then

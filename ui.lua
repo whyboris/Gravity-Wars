@@ -92,38 +92,32 @@ end
 --[[
     Dim all the shot trails on the screen
     meant to run after every shot
-    works by applying a black rectangle with low opacity over the whole screen
+    works by drawing a black rectangle with low opacity over the whole screen
+    then redraws all other elements on top
 --]]
 function dimTrails()
 
-    -- dims the whole thing - draws black rectangle with low opacity
-    -- love.graphics.setColor(0,0,0,1)                           -- need to reset back afterwards :/
-    -- need -1 because otherwise has a border that's ugly
-    -- love.graphics.rectangle('fill',-1,-1,WIDTH+5,HEIGHT+5)
-    -- love.graphics.setColor(1,1,1,1)                           -- need to reset back afterwards :/
-
-    -- print("dimTrails disabled")
     print("dimTrails EXECUTED")
 
     love.graphics.setCanvas(canvas)
-        love.graphics.setColor(0, 0, 0, 0.01)                   -- don't fortget to reset ?
+        love.graphics.setColor(0, 0, 0, 0.1)                     -- don't fortget to reset ?
         love.graphics.rectangle('fill', 0, 0, WIDTH, HEIGHT)
-        love.graphics.setColor(1, 1, 1, 1)                      -- reset back !?
-    love.graphics.setCanvas()
-
-
-    drawPlanets()
-    drawShips()
+        love.graphics.setColor(1, 1, 1, 1)                       -- reset back !?
+        drawPlanets()                                            -- execute inside `canvas` ?!
+        drawShips()
+        drawUI()
+    love.graphics.setCanvas()                                    -- reset canvas ?!
 
 end
 
 
 function drawPlanets()
 
-    -- love.graphics.setColor(214/255, 133/255, 83/255, 1)
-    love.graphics.setColor(217/255, 160/255, 59/255, 1)
 
     for i=1, numOfPlanets do
+        love.graphics.setColor(10/100, 10/100, 10/100, 1)
+        love.graphics.ellipse('fill', allPlanets[i].x, allPlanets[i].y, allPlanets[i].r, allPlanets[i].r)
+        love.graphics.setColor(1, 1, 1, 1)
         love.graphics.ellipse('line', allPlanets[i].x, allPlanets[i].y, allPlanets[i].r, allPlanets[i].r)
     end
 

@@ -18,20 +18,16 @@ function love.load()
 
     canvas = love.graphics.newCanvas(WIDTH, HEIGHT)
 
-    love.graphics.setCanvas(canvas)
-        love.graphics.clear()
-        love.graphics.setBlendMode("alpha")
-        love.graphics.setColor(1, 0, 0, 0.5)
-        love.graphics.rectangle('fill', 0, 0, 100, 100)
-    love.graphics.setCanvas()
+    -- love.graphics.setCanvas(canvas)
+    --     love.graphics.setBlendMode("alpha") -- what does this do ?!??
+    -- love.graphics.setCanvas()
 
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.rectangle('line',20,20,20,20)
 
     love.window.setMode(WIDTH,HEIGHT)
 
-    createPlanets()
-    drawPlanets()
+    newGame()
 
     -- resets the location of ship1
     shipX = player1.x
@@ -40,8 +36,6 @@ function love.load()
     player1.x = shipX
     player1.y = shipY
 
-    drawUI()
-    drawShips()
 
     -- without first shot the prorgram gives an error
     -- choose a shot:
@@ -106,6 +100,9 @@ function love.draw()
 
         if progressCheck == 0 then
             print("all shots have finished")
+
+            -- dimTrails()
+
             shotInProgress = false
             if turn == 1 then
                 turn = 2

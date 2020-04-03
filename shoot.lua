@@ -133,6 +133,8 @@ end
 
 function shootBulletAgain()
 
+    dimTrails()
+
     print("Whose is shooting? Player ", turn)
     shotInProgress = true
 
@@ -152,8 +154,6 @@ function shootBulletAgain()
     benign = 0
 
     numOfBullets = bullets
-
-    -- dimTrails()
 
     if bulType == 1 then
         shotType1()
