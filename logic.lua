@@ -222,11 +222,11 @@ function drawShot(b)
         -- (a)
         -- calculate force of planet on x1 and y1
         for i=1, numOfPlanets do
-            fpx[i] = (allPlanets[i].x - x1a[b]) / (math.pow( math.sqrt(((allPlanets[i].x - x1a[b]) * (allPlanets[i].x - x1a[b])) + ((allPlanets[i].y - y1a[b]) * (allPlanets[i].y - y1a[b]))), 3));
-        end
+            xDiff = allPlanets[i].x - x1a[b]
+            yDiff = allPlanets[i].y - y1a[b]
 
-        for i=1, numOfPlanets do
-            fpy[i] = (allPlanets[i].y - y1a[b]) / (math.pow( math.sqrt(((allPlanets[i].x - x1a[b]) * (allPlanets[i].x - x1a[b])) + ((allPlanets[i].y - y1a[b]) * (allPlanets[i].y - y1a[b]))), 3));
+            fpx[i] = xDiff / (math.pow( math.sqrt((xDiff * xDiff) + (yDiff * yDiff)), 3));
+            fpy[i] = yDiff / (math.pow( math.sqrt((xDiff * xDiff) + (yDiff * yDiff)), 3));
         end
 
         -- reset velocity
