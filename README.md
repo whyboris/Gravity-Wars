@@ -14,7 +14,7 @@ The initial commit code is a very quick and dirty port of my 2015 prototype code
 
 ## Development
 
-1. Install [LÖVE](https://love2d.org/)
+1. Install [LÖVE](https://love2d.org/) (game confirmed to work with v11.3)
 2. In your terminal run `love .`
 
 ## License
