@@ -29,8 +29,10 @@ _press the 'fire' button again to trigger the further effect_
 - split 2 x2 (_fire_: split into 2, then 4)
 - split 3 x2 (_fire_: split into 3; then 9)
 - split 2 x3 (_fire_: split into 2, then 4, then 8)
+- firework (explode after some period of time)
 
 Not shots but would be used instead of firing a shot
 
 - teleport to a random location
 - spacequake (moves all planets randomly a bit)
+- draw vector field (overlay a grid of benign bullets and make them draw for 3 iterations)
