@@ -29,15 +29,12 @@ function love.load()
 
     newGame()
 
-    -- resets the location of ship1
+    -- set location from where bullet will be shot
     shipX = player1.x
     shipY = player1.y
 
-    player1.x = shipX
-    player1.y = shipY
 
-
-    -- without first shot the prorgram gives an error
+    -- TODO: fix problem that without first shot the prorgram gives an error
     -- choose a shot:
     shotType3()
     -- initialShot()

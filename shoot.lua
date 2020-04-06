@@ -2,16 +2,13 @@
 -- Code related to shooting bullets
 ----------------------------------------------------------------------------------------------------
 
--- f is force,
--- t is theta (angle),
--- b is the index of the bullet
-function shootBullet(f,t,b)
-
-    -- this function sets the initial velocities for each bullet (index "b")
-    -- it doesn't shoot - it relies on the "drawShot" function to continue
-
-    --f = force
-    --t = angle
+-- this function sets the initial velocities for each bullet
+-- it doesn't shoot - it relies on the "drawShot" function to continue
+--
+-- f - force            additional to player's chosen force,
+-- t - theta (angle)    additional to player's chosen angle,
+-- bulletIndex - index of the bullet
+function setBulletsInitialVelocities(f, t, bulletIndex)
 
     if turn == 1 then
         -- preturb it by a bit for jitter so it's not the same
@@ -27,8 +24,8 @@ function shootBullet(f,t,b)
     f = f/2
 
     -- calculate the x and y components of shot for initial force
-    vix[b] = f * math.cos(0.0174533 * t)
-    viy[b] = f * math.sin(0.0174533 * t)
+    vix[bulletIndex] = f * math.cos(0.0174533 * t)
+    viy[bulletIndex] = f * math.sin(0.0174533 * t)
 
     -- to test what's going on
     -- print("force = ", f)
@@ -56,7 +53,7 @@ function split(x,y)
 
     for i=1, 3 do
         temp = numOfBullets - 3 + i
-        shootBullet(0.01,math.random(0,360),temp)
+        setBulletsInitialVelocities(0.01,math.random(0,360),temp)
     end
 
 end
@@ -69,7 +66,7 @@ function initialShot()
     for i=1, numOfBullets do
         x1a[i] = shipX
         y1a[i] = shipY
-        shootBullet(1,1,i)
+        setBulletsInitialVelocities(1,1,i)
     end
 
 end
@@ -83,7 +80,7 @@ function shotType1()
     for i=1, numOfBullets do
         x1a[i] = shipX
         y1a[i] = shipY
-        shootBullet(1,1,i)
+        setBulletsInitialVelocities(1,1,i)
     end
 
 end
@@ -94,10 +91,10 @@ function shotType2()
     -- shoot three bullets
     numOfBullets = 3
 
-   for i=1, numOfBullets do
+    for i=1, numOfBullets do
         x1a[i] = shipX
         y1a[i] = shipY
-        shootBullet(1,1,i)
+        setBulletsInitialVelocities(1,1,i)
     end
 
 end
@@ -108,10 +105,10 @@ function shotType3()
     -- shoot five bullets
     numOfBullets = 5
 
-   for i=1, numOfBullets do
+    for i=1, numOfBullets do
         x1a[i] = shipX
         y1a[i] = shipY
-        shootBullet(1,1,i)
+        setBulletsInitialVelocities(1,1,i)
     end
 
 end
@@ -125,18 +122,17 @@ function shotType4()
     for i=1, numOfBullets do
         x1a[i] = shipX
         y1a[i] = shipY
-        shootBullet(1,1,i)
+        setBulletsInitialVelocities(1,1,i)
     end
 
 end
 
 
-function shootBulletAgain()
+function playerPressedShootButton()
 
     dimTrails()
 
     print("Whose is shooting? Player ", turn)
-    shotInProgress = true
 
     -- origin of the shot set to player's location
     if turn == 1 then
@@ -162,13 +158,15 @@ function shootBulletAgain()
         for i=1, numOfBullets do
             x1a[i] = shipX
             y1a[i] = shipY
-            shootBullet(2,2,i)
+            setBulletsInitialVelocities(2,2,i)
         end
     end
 
     love.graphics.setCanvas(canvas)
         drawUI()
     love.graphics.setCanvas()
+
+    shotInProgress = true
 
 end
 
@@ -203,7 +201,7 @@ function explode(x,y)
 
     for i=1, 10 do
         temp = numOfBullets - 10 + i
-        shootBullet(0.01,math.random(0,360),temp)
+        setBulletsInitialVelocities(0.01,math.random(0,360),temp)
     end
 
 end

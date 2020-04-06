@@ -16,7 +16,7 @@ function love.mousepressed(x, y, button)
 
     if (x > (WIDTH - 100) and y < 100) then
         if shotInProgress == false then
-            shootBulletAgain()
+            playerPressedShootButton()
         end
     elseif (x > 50 and x < 410 and y > 0  and y < 50) then
         mouseXinitial = x
