@@ -85,15 +85,15 @@ function collisonCheck(b)
     -- whenever the bullet hits the planet - remove from drawing & computing
     for i=1,numOfPlanets do
 
-        if(math.sqrt(math.pow(allPlanets[i].x-x1a[b],2)+math.pow(allPlanets[i].y-y1a[b],2))) < allPlanets[i].r then
+        if(math.sqrt(math.pow(allPlanets[i].x-allBullets[b].x,2)+math.pow(allPlanets[i].y-allBullets[b].y,2))) < allPlanets[i].r then
 
             -- remove the bullet from the playing field
             -- as long as it's placed outside the cutoff set in the drawShot()
             -- it will not compute!!! no wasted CPU cycles!
-            x1a[b] = 0
-            y1a[b] = 0
-            vix[b] = 0
-            viy[b] = 0
+            allBullets[b].x = 0
+            allBullets[b].y = 0
+            allBullets[b].vx = 0
+            allBullets[b].vy = 0
 
             -- this dims the trails on every collision -- probably should disable
             -- dimTrails()
@@ -114,7 +114,7 @@ function collisonCheck(b)
     -- check if you hit opponent (num of bullets must affect benign,
     -- because with too many bullets it kills itself because benign is too high
     if benign > numOfBullets*50 then
-        if(math.sqrt(math.pow(player2.x-x1a[b],2)+math.pow(player2.y-y1a[b],2))) < 10 then
+        if(math.sqrt(math.pow(player2.x-allBullets[b].x,2)+math.pow(player2.y-allBullets[b].y,2))) < 10 then
             print("you hit the opponent!")
 
             if endOfRound == false then
@@ -124,7 +124,7 @@ function collisonCheck(b)
             endOfRound = true
             -- explode this location !!!
             love.graphics.ellipse('line', player2.x, player2.y, 15, 15)
-            explode(x1a[b],y1a[b])
+            explode(allBullets[b].x,allBullets[b].y)
             player1.health = 0
 
             if player1.lives == 0 then
@@ -135,7 +135,7 @@ function collisonCheck(b)
 
     -- check if you hit yourself
     if benign > numOfBullets*50 then
-        if(math.sqrt(math.pow(player1.x-x1a[b],2)+math.pow(player1.y-y1a[b],2))) < 10 then
+        if(math.sqrt(math.pow(player1.x-allBullets[b].x,2)+math.pow(player1.y-allBullets[b].y,2))) < 10 then
             print("you hit yourself!")
 
             if endOfRound == false then
@@ -145,7 +145,7 @@ function collisonCheck(b)
             endOfRound = true
             -- explode this location !!!
             love.graphics.ellipse('line', player1.x, player1.y, 15, 15)
-            explode(x1a[b],y1a[b])
+            explode(allBullets[b].x,allBullets[b].y)
             player2.health = 0
             if player2.lives == 0 then
                 print("GAME OVER, player 2 WON")
@@ -159,8 +159,8 @@ function collisonCheck(b)
 
     -- check how close you are to the opponent; updates player1.health
     if turn == 1 then
-        if player1.health > math.sqrt(math.pow(player2.x-x1a[b],2)+math.pow(player2.y-y1a[b],2)) then
-            player1.health = math.sqrt(math.pow(player2.x-x1a[b],2)+math.pow(player2.y-y1a[b],2))
+        if player1.health > math.sqrt(math.pow(player2.x-allBullets[b].x,2)+math.pow(player2.y-allBullets[b].y,2)) then
+            player1.health = math.sqrt(math.pow(player2.x-allBullets[b].x,2)+math.pow(player2.y-allBullets[b].y,2))
             love.graphics.setCanvas(canvas)
                 drawUI()
             love.graphics.setCanvas()
@@ -174,8 +174,8 @@ function collisonCheck(b)
     -- so that the health meter doesn't freak out as soon as you shoot your bullet
     -- should be disabled on your turn
     if turn == 2 then
-        if player2.health > math.sqrt(math.pow(player1.x-x1a[b],2)+math.pow(player1.y-y1a[b],2)) then
-            player2.health = math.sqrt(math.pow(player1.x-x1a[b],2)+math.pow(player1.y-y1a[b],2))
+        if player2.health > math.sqrt(math.pow(player1.x-allBullets[b].x,2)+math.pow(player1.y-allBullets[b].y,2)) then
+            player2.health = math.sqrt(math.pow(player1.x-allBullets[b].x,2)+math.pow(player1.y-allBullets[b].y,2))
             love.graphics.setCanvas(canvas)
                 drawUI()
             love.graphics.setCanvas()
@@ -213,15 +213,18 @@ THE MOST IMPORTANT FUNCTION - draws the lines for the shot "b" where b is the sh
 --]]
 function drawShot(b)
 
+    -- Variables involved:
+    -- b - bulletIndex `[b]`
+
     -- (1)
     -- set the shot outside if it hits outside the play border
-    if x1a[b]>WIDTH-10 or x1a[b]<10 or y1a[b]>WIDTH-10 or y1a[b]<10 then
-        x1a[b] = 0
-        y1a[b] = 0
+    if allBullets[b].x>WIDTH-10 or allBullets[b].x<10 or allBullets[b].y>WIDTH-10 or allBullets[b].y<10 then
+        allBullets[b].x = 0
+        allBullets[b].y = 0
     end
 
     -- (3)
-    if x1a[b]<WIDTH-10 and x1a[b]>10 and y1a[b]<WIDTH-10 and y1a[b]>10 then
+    if allBullets[b].x<WIDTH-10 and allBullets[b].x>10 and allBullets[b].y<WIDTH-10 and allBullets[b].y>10 then
 
         -- array to store forces from each planet to each shot (temp use always)
         fpx = {}
@@ -230,14 +233,14 @@ function drawShot(b)
         -- (a)
         -- calculate force of planet on x1 and y1
         for i=1, numOfPlanets do
-            xDiff = allPlanets[i].x - x1a[b]
-            yDiff = allPlanets[i].y - y1a[b]
+            xDiff = allPlanets[i].x - allBullets[b].x
+            yDiff = allPlanets[i].y - allBullets[b].y
 
             fpx[i] = xDiff / (math.pow( math.sqrt((xDiff * xDiff) + (yDiff * yDiff)), 3));
             fpy[i] = yDiff / (math.pow( math.sqrt((xDiff * xDiff) + (yDiff * yDiff)), 3));
         end
 
-        -- reset velocity
+        -- reset velocity -- TEMPORARY VARIABLES
         vfx = 0
         vfy = 0
 
@@ -252,23 +255,23 @@ function drawShot(b)
         end
 
         -- (c)
-        -- add initiav velocity to the final velocity
-        vfx = vfx + vix[b]
-        vfy = vfy + viy[b]
+        -- add initial velocity to the final velocity
+        vfx = vfx + allBullets[b].vx
+        vfy = vfy + allBullets[b].vy
 
         -- set velocity of each bullet to its final velocity
-        vix[b] = vfx
-        viy[b] = vfy
+        allBullets[b].vx = vfx
+        allBullets[b].vy = vfy
 
         -- (d)
         -- Draw shot to canvas
         love.graphics.setCanvas(canvas)                                       -- direct drawing operations to the canvas
-            love.graphics.line(x1a[b],y1a[b],x1a[b]+vfx,y1a[b]+vfy)                                    -- draw to canvas
+            love.graphics.line(allBullets[b].x,allBullets[b].y,allBullets[b].x+vfx,allBullets[b].y+vfy)                                    -- draw to canvas
         love.graphics.setCanvas()                                                -- re-enable drawing to the main screen
 
         -- (e)
-        x1a[b] = x1a[b] + vfx
-        y1a[b] = y1a[b] + vfy
+        allBullets[b].x = allBullets[b].x + vfx
+        allBullets[b].y = allBullets[b].y + vfy
 
     end
 

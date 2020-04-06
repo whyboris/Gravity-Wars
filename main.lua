@@ -12,7 +12,7 @@ require "touch"
 function love.load()
 
     -- math.randomseed(42)  -- goes out of bounds
-    math.randomseed(232) -- shot comes close to opponent
+    math.randomseed(232) -- shot comes close to opponent; set `shotType3()` numOfBullets to 15 to hit opponent
 
     setVariables() -- globals.lua
 
@@ -79,13 +79,15 @@ function love.draw()
     if shotInProgress == true then
 
         -- if the x location of each shot == 0 then end the turn
-        progressCheck = 0
+        bulletsInFlight = false
 
         for i=1, numOfBullets do
-            progressCheck = x1a[i] + progressCheck
+            if allBullets[i].x ~= 0 and allBullets[i].y ~= 0 then
+                bulletsInFlight = true -- HACK -- assumes position of disabled bullet is = (0, 0)
+            end
         end
 
-        if progressCheck == 0 then
+        if bulletsInFlight == false then
             print("all shots have finished")
 
             shotInProgress = false

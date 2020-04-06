@@ -24,8 +24,8 @@ function setBulletsInitialVelocities(f, t, bulletIndex)
     f = f/2
 
     -- calculate the x and y components of shot for initial force
-    vix[bulletIndex] = f * math.cos(0.0174533 * t)
-    viy[bulletIndex] = f * math.sin(0.0174533 * t)
+    allBullets[bulletIndex].vx = f * math.cos(0.0174533 * t)
+    allBullets[bulletIndex].vy = f * math.sin(0.0174533 * t)
 
     -- to test what's going on
     -- print("force = ", f)
@@ -44,8 +44,9 @@ function split(x,y)
 
     for i=1, 3 do
         temp = numOfBullets + i
-        x1a[temp] = x
-        y1a[temp] = y
+        allBullets[i] = {}
+        allBullets[temp].x = x
+        allBullets[temp].y = y
     end
 
     numOfBullets = numOfBullets + 3
@@ -65,8 +66,9 @@ function shotType1()
     numOfBullets = 1
 
     for i=1, numOfBullets do
-        x1a[i] = shipX
-        y1a[i] = shipY
+        allBullets[i] = {}
+        allBullets[i].x = shipX
+        allBullets[i].y = shipY
         setBulletsInitialVelocities(1,1,i)
     end
 
@@ -79,8 +81,9 @@ function shotType2()
     numOfBullets = 3
 
     for i=1, numOfBullets do
-        x1a[i] = shipX
-        y1a[i] = shipY
+        allBullets[i] = {}
+        allBullets[i].x = shipX
+        allBullets[i].y = shipY
         setBulletsInitialVelocities(1,1,i)
     end
 
@@ -93,8 +96,9 @@ function shotType3()
     numOfBullets = 5
 
     for i=1, numOfBullets do
-        x1a[i] = shipX
-        y1a[i] = shipY
+        allBullets[i] = {}
+        allBullets[i].x = shipX
+        allBullets[i].y = shipY
         setBulletsInitialVelocities(1,1,i)
     end
 
@@ -107,8 +111,9 @@ function shotType4()
     numOfBullets = 1
 
     for i=1, numOfBullets do
-        x1a[i] = shipX
-        y1a[i] = shipY
+        allBullets[i] = {}
+        allBullets[i].x = shipX
+        allBullets[i].y = shipY
         setBulletsInitialVelocities(1,1,i)
     end
 
@@ -130,6 +135,8 @@ function playerPressedShootButton()
         shipY = player2.y
     end
 
+    allBullets = {} -- reset to empty
+
     -- make bullet benign
     benign = 0
 
@@ -143,8 +150,9 @@ function playerPressedShootButton()
         shotType4()
     else
         for i=1, numOfBullets do
-            x1a[i] = shipX
-            y1a[i] = shipY
+            allBullets[i] = {}
+            allBullets[i].x = shipX
+            allBullets[i].y = shipY
             setBulletsInitialVelocities(2,2,i)
         end
     end
@@ -164,11 +172,12 @@ end
 -- function takes x,y location and blows up that spot
 function explode(x,y)
 
-    love.graphics.ellipse('line',x,y,10,10)
-
     benign = -100
 
-    love.graphics.setColor(200/255,20/255,20/255,1)
+    love.graphics.setCanvas(canvas)
+        love.graphics.ellipse('line',x,y,10,10)
+        love.graphics.setColor(200/255,20/255,20/255,1)
+    love.graphics.setCanvas()
 
     --print("EXPLOSION @ ", x, y)
 
@@ -179,8 +188,9 @@ function explode(x,y)
 
     for i=1, 10 do
         temp = numOfBullets + i
-        x1a[temp] = x
-        y1a[temp] = y
+        allBullets[temp] = {}
+        allBullets[temp].x = x
+        allBullets[temp].y = y
     end
 
     numOfBullets = numOfBullets + 10

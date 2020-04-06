@@ -27,6 +27,8 @@ function setVariables()
 
     allPlanets = {} -- each planet will have `mass`, `r`, `x`, `y`
 
+    allBullets = {} -- list of bullets, each will have `x`, `y`, and `vx`, `vy` (velocity x & y components)
+
     player1 = {
         x = 100,
         y = 100,
@@ -51,25 +53,9 @@ function setVariables()
     -- used to end the turn sometime
     shotInProgress = false
 
-    -- temporary variable - add up all the x locations of shots; if == 0, end turn
-    progressCheck = 1
-
     -- integer to provide time-out so your bullet doesn't kill you in the first 10 iterations
     -- benign while it's less than 10, for example (see collision check)
     benign = 0
-
-    -- array used to store location of each shot - x location, y location.
-    x1a = {}
-    y1a = {}
-
-    -- floats for computing lines to draw (initial and final velocities)
-    vix = {} -- initial velocities of shots
-    viy = {}
-    vfx = 0 -- only used temporarily during shot
-    vfy = 0
-
-    -- throwaway variable
-    temp = 0
 
     -- if end of round = 1 it restarts the game after all the bullets end their path
     endOfRound = false
