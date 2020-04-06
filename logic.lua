@@ -83,7 +83,7 @@ function collisonCheck(b)
     -- insert code that will set shotInProgress = false if all bullets are gone and end the turn with it
 
     -- whenever the bullet hits the planet - remove from drawing & computing
-    for i=1,numOfPlanets do
+    for i=1, numOfPlanets do
 
         if(math.sqrt(math.pow(allPlanets[i].x-allBullets[b].x,2)+math.pow(allPlanets[i].y-allBullets[b].y,2))) < allPlanets[i].r then
 
@@ -104,55 +104,16 @@ function collisonCheck(b)
     end
 
 
-    -- benign makes your own bullet not kill you for the first few moments when you shoot
-    benign = benign + 1
-
 
     -- *** ADD CODE - at the moment hitting yourself can cause your opponent's health bar to change
 
 
     -- check if you hit opponent (num of bullets must affect benign,
     -- because with too many bullets it kills itself because benign is too high
-    if benign > numOfBullets*50 then
-        if(math.sqrt(math.pow(player2.x-allBullets[b].x,2)+math.pow(player2.y-allBullets[b].y,2))) < 10 then
-            print("you hit the opponent!")
-
-            if endOfRound == false then
-                player1.lives = player1.lives - 1
-            end
-
-            endOfRound = true
-            -- explode this location !!!
-            love.graphics.ellipse('line', player2.x, player2.y, 15, 15)
-            explode(allBullets[b].x,allBullets[b].y)
-            player1.health = 0
-
-            if player1.lives == 0 then
-                print("GAME OVER, player 1 WON")
-            end
-        end
+    if benign > 50 then
+        didYouHitPlayer(player1, b)
+        didYouHitPlayer(player2, b)
     end
-
-    -- check if you hit yourself
-    if benign > numOfBullets*50 then
-        if(math.sqrt(math.pow(player1.x-allBullets[b].x,2)+math.pow(player1.y-allBullets[b].y,2))) < 10 then
-            print("you hit yourself!")
-
-            if endOfRound == false then
-                player2.lives = player2.lives - 1
-            end
-
-            endOfRound = true
-            -- explode this location !!!
-            love.graphics.ellipse('line', player1.x, player1.y, 15, 15)
-            explode(allBullets[b].x,allBullets[b].y)
-            player2.health = 0
-            if player2.lives == 0 then
-                print("GAME OVER, player 2 WON")
-            end
-        end
-    end
-
 
     -- *** MAYBE EDIT THIS - NEED TO ALTERNATE WHEN TO UPDATE DISTANCES
     -- *** NEED *** to update player1.health only for opponent, not for self !!!
@@ -181,6 +142,31 @@ function collisonCheck(b)
             love.graphics.setCanvas()
             --print("closest we got to ss1 is ", player1.health)
             --print("turn B", turn)
+        end
+    end
+
+end
+
+
+-- don't forget `b` the bullet index
+function didYouHitPlayer(playerN, b)
+
+    if(math.sqrt(math.pow(playerN.x - allBullets[b].x, 2) + math.pow(playerN.y - allBullets[b].y, 2))) < 10 then
+        print("you hit someone!")
+
+        -- only decrease 1 life!
+        if endOfRound == false then
+            playerN.lives = playerN.lives - 1
+        end
+
+        endOfRound = true
+        -- explode this location !!!
+        love.graphics.ellipse('line', playerN.x, playerN.y, 15, 15)
+        explode(allBullets[b].x,allBullets[b].y)
+        playerN.health = 0
+
+        if playerN.lives == 0 then
+            print("GAME OVER, SOMEONE WON!")
         end
     end
 

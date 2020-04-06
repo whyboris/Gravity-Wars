@@ -73,6 +73,9 @@ function love.draw()
         for i=1, numOfBullets do
             collisonCheck(i)
         end
+
+        -- benign makes your own bullet not kill you for the first few moments when you shoot
+        benign = benign + 1
     end
 
 
@@ -123,4 +126,3 @@ function love.draw()
     love.graphics.draw(canvas)
 
 end
-
