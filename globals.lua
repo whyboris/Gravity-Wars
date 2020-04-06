@@ -60,8 +60,10 @@ function setVariables()
     endOfRound = false
 
     -- kaleidoscope mode colors for shot trails
-    lineColor1 = 1
-    lineColor2 = 1
-    lineColor3 = 1
+    rainbow = {
+        r = 1,
+        g = 1,
+        b = 1
+    }
 
 end

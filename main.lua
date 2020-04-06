@@ -44,14 +44,14 @@ function love.draw()
     if colorMode == 1 then
         -- this has potential to run over (how many minutes till it crashes?)
         -- might want it to reset to 0 sometimes
-        lineColor1 = lineColor1 + 1
-        lineColor2 = lineColor2 + 2
-        lineColor3 = lineColor3 + 3
+        rainbow.r = rainbow.r + 1
+        rainbow.g = rainbow.g + 2
+        rainbow.b = rainbow.b + 3
 
         -- this code oscilates the color all the time (mathematically heavy)
-        love.graphics.setColor(math.floor(200 * math.abs(math.sin(lineColor1 * 0.005)) + 54) / 255,
-                               math.floor(200 * math.abs(math.sin(lineColor2 * 0.004)) + 54) / 255,
-                               math.floor(200 * math.abs(math.sin(lineColor3 * 0.003)) + 54) / 255, 1)
+        love.graphics.setColor(math.floor(200 * math.abs(math.sin(rainbow.r * 0.005)) + 54) / 255,
+                               math.floor(200 * math.abs(math.sin(rainbow.g * 0.004)) + 54) / 255,
+                               math.floor(200 * math.abs(math.sin(rainbow.b * 0.003)) + 54) / 255, 1)
     elseif colorMode == 2 then
         love.graphics.setColor(1, 1, 1, 1)
     end
