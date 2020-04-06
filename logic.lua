@@ -103,46 +103,12 @@ function collisonCheck(b)
         end
     end
 
-
-
-    -- *** ADD CODE - at the moment hitting yourself can cause your opponent's health bar to change
-
-
-    -- check if you hit opponent (num of bullets must affect benign,
-    -- because with too many bullets it kills itself because benign is too high
+    -- grace period when your bullet can't kill you
     if benign > 50 then
         didYouHitPlayer(player1, b)
         didYouHitPlayer(player2, b)
-    end
-
-    -- *** MAYBE EDIT THIS - NEED TO ALTERNATE WHEN TO UPDATE DISTANCES
-    -- *** NEED *** to update player1.health only for opponent, not for self !!!
-
-    -- check how close you are to the opponent; updates player1.health
-    if turn == 1 then
-        if player1.health > math.sqrt(math.pow(player2.x-allBullets[b].x,2)+math.pow(player2.y-allBullets[b].y,2)) then
-            player1.health = math.sqrt(math.pow(player2.x-allBullets[b].x,2)+math.pow(player2.y-allBullets[b].y,2))
-            love.graphics.setCanvas(canvas)
-                drawUI()
-            love.graphics.setCanvas()
-            --print("closest we got to ss2 is ", player1.health)
-            --print("turn A", turn)
-        end
-    end
-
-    -- check how close you are to the opponent; updates player2.health
-    -- edit this code for later - at the moment needs to use "benign"
-    -- so that the health meter doesn't freak out as soon as you shoot your bullet
-    -- should be disabled on your turn
-    if turn == 2 then
-        if player2.health > math.sqrt(math.pow(player1.x-allBullets[b].x,2)+math.pow(player1.y-allBullets[b].y,2)) then
-            player2.health = math.sqrt(math.pow(player1.x-allBullets[b].x,2)+math.pow(player1.y-allBullets[b].y,2))
-            love.graphics.setCanvas(canvas)
-                drawUI()
-            love.graphics.setCanvas()
-            --print("closest we got to ss1 is ", player1.health)
-            --print("turn B", turn)
-        end
+        updateHealthBar(player1, player2, b)
+        updateHealthBar(player2, player1, b)
     end
 
 end
@@ -172,6 +138,20 @@ function didYouHitPlayer(playerN, b)
 
 end
 
+
+-- don't forget `b` the bullet index
+function updateHealthBar(playerN, opponent, b)
+
+    distanceFromShot = math.sqrt(math.pow(playerN.x-allBullets[b].x,2)+math.pow(playerN.y-allBullets[b].y,2))
+
+    if opponent.health > distanceFromShot then
+        opponent.health = distanceFromShot
+        love.graphics.setCanvas(canvas)
+            drawUI()
+        love.graphics.setCanvas()
+    end
+
+end
 
 
 -- TODO: figure out a sensible default for resolution of the shot and speed of the shot
