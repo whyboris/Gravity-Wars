@@ -15,11 +15,11 @@ function shootBullet(f,t,b)
 
     if turn == 1 then
         -- preturb it by a bit for jitter so it's not the same
-        f = player1.force + math.random()*2 + f
-        t = player1.angle + math.random()*10 + t
+        f = player1.force + f + math.random() *  2
+        t = player1.angle + t + math.random() * 10
     elseif turn == 2 then
-        f = player2.force + math.random()*2 + f
-        t = player2.angle + math.random()*10 + t
+        f = player2.force + f + math.random() *  2
+        t = player2.angle + t + math.random() * 10
     end
 
     -- *** REDUCE THE FORCE BY some amount and reduce weight of planets by some amount
@@ -27,8 +27,8 @@ function shootBullet(f,t,b)
     f = f/2
 
     -- calculate the x and y components of shot for initial force
-    vix[b]=f*math.cos(0.0174533*t)
-    viy[b]=f*math.sin(0.0174533*t)
+    vix[b] = f * math.cos(0.0174533 * t)
+    viy[b] = f * math.sin(0.0174533 * t)
 
     -- to test what's going on
     -- print("force = ", f)
@@ -138,13 +138,10 @@ function shootBulletAgain()
     print("Whose is shooting? Player ", turn)
     shotInProgress = true
 
-    -- *** insert code to select which player *** ???
-    -- or have every shot ask as an argument which player is shooting?
+    -- origin of the shot set to player's location
     if turn == 1 then
         shipX = player1.x
         shipY = player1.y
-        force = player1.force
-        angle = player1.angle
     elseif turn == 2 then
         shipX = player2.x
         shipY = player2.y
@@ -152,8 +149,6 @@ function shootBulletAgain()
 
     -- make bullet benign
     benign = 0
-
-    numOfBullets = bullets
 
     if bulType == 1 then
         shotType1()
@@ -174,13 +169,6 @@ function shootBulletAgain()
     love.graphics.setCanvas(canvas)
         drawUI()
     love.graphics.setCanvas()
-
-    -- this code changed the turn too soon and made the health bar act improperly
-    -- if turn == 1 then
-    --     --turn = 2
-    -- elseif turn == 2 then
-    --     --turn = 1
-    -- end
 
 end
 
