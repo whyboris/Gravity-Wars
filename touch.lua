@@ -1,7 +1,6 @@
 ----------------------------------------------------------------------------------------------------
 -- Code related to touch interactions (from Codea, not yet updated for Love2D)
 ----------------------------------------------------------------------------------------------------
-
 -- toggle booleans if clicked in areas where button / sliders are
 function love.mousepressed(x, y, button)
 
@@ -12,17 +11,15 @@ function love.mousepressed(x, y, button)
     if shotInProgress == true then
         explode(x,y)
     end
-    ]]--
+    ]] --
 
     if (x > (WIDTH - 100) and y < 100) then
-        if shotInProgress == false then
-            playerPressedShootButton()
-        end
-    elseif (x > 50 and x < 410 and y > 0  and y < 50) then
+        if shotInProgress == false then playerPressedShootButton() end
+    elseif (x > 50 and x < 410 and y > 0 and y < 50) then
         mouseXinitial = x
         draggingType = 'force'
         dragging = true
-    elseif (x > 50 and x < 410 and y > 50  and y < 110)  then
+    elseif (x > 50 and x < 410 and y > 50 and y < 110) then
         mouseXinitial = x
         draggingType = 'angle'
         dragging = true
@@ -30,9 +27,7 @@ function love.mousepressed(x, y, button)
 end
 
 -- short circuit the love.update function with boolean
-function love.mousereleased(x, y, button)
-    dragging = false
-end
+function love.mousereleased(x, y, button) dragging = false end
 
 -- if the mouse is being dragged after clicking, update the values of force or angle
 -- uses distance from initial click for smoothly
@@ -48,23 +43,23 @@ function love.update(dt)
             if draggingType == 'angle' then
 
                 if turn == 1 then
-                    player1.angle = player1.angle + math.pow(diff/200,3)
+                    player1.angle = player1.angle + math.pow(diff / 200, 3)
                 elseif turn == 2 then
-                    player2.angle = player2.angle + math.pow(diff/200,3)
+                    player2.angle = player2.angle + math.pow(diff / 200, 3)
                 end
 
             elseif draggingType == 'force' then
 
                 if turn == 1 then
-                    player1.force = player1.force + math.pow(diff/1000,3)
+                    player1.force = player1.force + math.pow(diff / 1000, 3)
                 elseif turn == 2 then
-                    player2.force = player2.force + math.pow(diff/1000,3)
+                    player2.force = player2.force + math.pow(diff / 1000, 3)
                 end
 
             end
 
             love.graphics.setCanvas(canvas)
-                drawUI()
+            drawUI()
             love.graphics.setCanvas()
 
         end

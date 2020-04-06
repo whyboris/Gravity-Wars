@@ -1,7 +1,6 @@
 ----------------------------------------------------------------------------------------------------
 -- Code related to shooting bullets
 ----------------------------------------------------------------------------------------------------
-
 -- this function sets the initial velocities for each bullet
 -- it doesn't shoot - it relies on the "drawShot" function to continue
 --
@@ -12,16 +11,16 @@ function setBulletsInitialVelocities(f, t, bulletIndex)
 
     if turn == 1 then
         -- preturb it by a bit for jitter so it's not the same
-        f = player1.force + f + math.random() *  2
+        f = player1.force + f + math.random() * 2
         t = player1.angle + t + math.random() * 10
     elseif turn == 2 then
-        f = player2.force + f + math.random() *  2
+        f = player2.force + f + math.random() * 2
         t = player2.angle + t + math.random() * 10
     end
 
     -- *** REDUCE THE FORCE BY some amount and reduce weight of planets by some amount
     -- *** this will make the resolution of the shot higher!!?! ***
-    f = f/2
+    f = f / 2
 
     -- calculate the x and y components of shot for initial force
     allBullets[bulletIndex].vx = f * math.cos(0.0174533 * t)
@@ -34,15 +33,15 @@ function setBulletsInitialVelocities(f, t, bulletIndex)
 end
 
 -- to split a bullet (special bullet type allows for splitting while in air)
-function split(x,y)
+function split(x, y)
 
-    love.graphics.ellipse('line',x,y,10,10)
+    love.graphics.ellipse('line', x, y, 10, 10)
 
-    --print("SPLIT @ ", x, y)
+    -- print("SPLIT @ ", x, y)
 
     temp = 0
 
-    for i=1, 3 do
+    for i = 1, 3 do
         temp = numOfBullets + i
         allBullets[i] = {}
         allBullets[temp].x = x
@@ -52,73 +51,68 @@ function split(x,y)
     numOfBullets = numOfBullets + 3
     temp = 0
 
-    for i=1, 3 do
+    for i = 1, 3 do
         temp = numOfBullets - 3 + i
-        setBulletsInitialVelocities(0.01,math.random(0,360),temp)
+        setBulletsInitialVelocities(0.01, math.random(0, 360), temp)
     end
 
 end
-
 
 function shotType1()
 
     -- shoot only one bullet
     numOfBullets = 1
 
-    for i=1, numOfBullets do
+    for i = 1, numOfBullets do
         allBullets[i] = {}
         allBullets[i].x = shipX
         allBullets[i].y = shipY
-        setBulletsInitialVelocities(1,1,i)
+        setBulletsInitialVelocities(1, 1, i)
     end
 
 end
-
 
 function shotType2()
 
     -- shoot three bullets
     numOfBullets = 3
 
-    for i=1, numOfBullets do
+    for i = 1, numOfBullets do
         allBullets[i] = {}
         allBullets[i].x = shipX
         allBullets[i].y = shipY
-        setBulletsInitialVelocities(1,1,i)
+        setBulletsInitialVelocities(1, 1, i)
     end
 
 end
-
 
 function shotType3()
 
     -- shoot five bullets
     numOfBullets = 5
 
-    for i=1, numOfBullets do
+    for i = 1, numOfBullets do
         allBullets[i] = {}
         allBullets[i].x = shipX
         allBullets[i].y = shipY
-        setBulletsInitialVelocities(1,1,i)
+        setBulletsInitialVelocities(1, 1, i)
     end
 
 end
-
 
 function shotType4()
 
     -- shoot only one bullet
     numOfBullets = 1
 
-    for i=1, numOfBullets do
+    for i = 1, numOfBullets do
         allBullets[i] = {}
         allBullets[i].x = shipX
         allBullets[i].y = shipY
-        setBulletsInitialVelocities(1,1,i)
+        setBulletsInitialVelocities(1, 1, i)
     end
 
 end
-
 
 function playerPressedShootButton()
 
@@ -149,44 +143,42 @@ function playerPressedShootButton()
     elseif bulType == 4 then
         shotType4()
     else
-        for i=1, numOfBullets do
+        for i = 1, numOfBullets do
             allBullets[i] = {}
             allBullets[i].x = shipX
             allBullets[i].y = shipY
-            setBulletsInitialVelocities(2,2,i)
+            setBulletsInitialVelocities(2, 2, i)
         end
     end
 
     love.graphics.setCanvas(canvas)
-        drawUI()
+    drawUI()
     love.graphics.setCanvas()
 
     shotInProgress = true
 
 end
 
-
-
 -- should write a better function: one that explodes a SHIP not a location!
 
 -- function takes x,y location and blows up that spot
-function explode(x,y)
+function explode(x, y)
 
     benign = -100
 
     love.graphics.setCanvas(canvas)
-        love.graphics.ellipse('line',x,y,10,10)
-        love.graphics.setColor(200/255,20/255,20/255,1)
+    love.graphics.ellipse('line', x, y, 10, 10)
+    love.graphics.setColor(200 / 255, 20 / 255, 20 / 255, 1)
     love.graphics.setCanvas()
 
-    --print("EXPLOSION @ ", x, y)
+    -- print("EXPLOSION @ ", x, y)
 
     -- add the bullets, don't use existing ones!!!
     -- might keep re-using the 10 bullets I create if hits again - not sure ***
 
     temp = 0
 
-    for i=1, 10 do
+    for i = 1, 10 do
         temp = numOfBullets + i
         allBullets[temp] = {}
         allBullets[temp].x = x
@@ -196,9 +188,9 @@ function explode(x,y)
     numOfBullets = numOfBullets + 10
     temp = 0
 
-    for i=1, 10 do
+    for i = 1, 10 do
         temp = numOfBullets - 10 + i
-        setBulletsInitialVelocities(0.01,math.random(0,360),temp)
+        setBulletsInitialVelocities(0.01, math.random(0, 360), temp)
     end
 
 end
