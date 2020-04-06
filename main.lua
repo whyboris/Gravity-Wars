@@ -89,20 +89,6 @@ function love.draw()
             love.graphics.setCanvas()
         end
 
-    else
-
-        love.graphics.setCanvas(canvas2)
-        love.graphics.clear()
-
-        if turn == 1 then
-            drawPlayerAngleAndForce(player1)
-        else
-            drawPlayerAngleAndForce(player2)
-        end
-
-        love.graphics.setCanvas()
-        love.graphics.draw(canvas2)
-
     end
 
     -- this code here WILL dim the trails continuously when explosion occurs
@@ -121,19 +107,57 @@ function love.draw()
     -- RENDER THE CANVAS NOW
     love.graphics.draw(canvas)
 
+    if shotInProgress == false then
+
+        love.graphics.setCanvas(canvas2)
+        love.graphics.clear()
+
+        if turn == 1 then
+            drawPlayerAngleAndForce(player1)
+        else
+            drawPlayerAngleAndForce(player2)
+        end
+
+        love.graphics.setCanvas()
+        love.graphics.draw(canvas2)
+
+    end
+
+    drawShips()
+
+    love.graphics.setColor(1, 1, 1, 1)
+
 end
 
 
 function drawPlayerAngleAndForce(playerN)
 
+    -- large black circle
+    love.graphics.setColor(0, 0, 0, 0.6)
+    love.graphics.ellipse('fill', playerN.x, playerN.y, 100, 100)
+
+    -- red arc showing force
+    love.graphics.setColor(1, 0, 0, 1)
+    love.graphics.arc('fill', 'pie', playerN.x, playerN.y, playerN.force * 20, 0.0174533 * playerN.angle - 0.1, 0.0174533 * playerN.angle + 0.1)
+
+    -- smaller red circle showing force
+    love.graphics.setColor(1, 0, 0, 0.4)
+    love.graphics.ellipse('line', playerN.x, playerN.y, playerN.force * 20, playerN.force * 20)
+
+    -- love.graphics.setColor(1, 0, 0, 1)
+    -- love.graphics.line(playerN.x, playerN.y,
+    --                     playerN.x + math.cos(0.0174533 * playerN.angle) * 100 * playerN.force / 5,
+    --                     playerN.y + math.sin(0.0174533 * playerN.angle) * 100 * playerN.force / 5)
+
+    -- large white circle showing maximum
+    love.graphics.setColor(1, 1, 1, 0.6)
+    love.graphics.ellipse('line', playerN.x, playerN.y, 100, 100)
+
+    -- long line showing angle
+    love.graphics.setColor(1, 1, 1, 1)
     love.graphics.ellipse('line', playerN.x, playerN.y, 10, 10)
     love.graphics.line(playerN.x, playerN.y,
                         playerN.x + math.cos(0.0174533 * playerN.angle) * 100,
                         playerN.y + math.sin(0.0174533 * playerN.angle) * 100)
-    love.graphics.setColor(1, 0, 0, 1)
-    love.graphics.line(playerN.x, playerN.y,
-                        playerN.x + math.cos(0.0174533 * playerN.angle) * 100 * playerN.force / 5,
-                        playerN.y + math.sin(0.0174533 * playerN.angle) * 100 * playerN.force / 5)
-    love.graphics.setColor(1, 1, 1, 1)
 
 end

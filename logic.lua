@@ -245,7 +245,4 @@ function drawShot(b)
 
     end
 
-    -- need some code that checks if all the bullets have been extinguished
-    -- and then restart the shot with a different person's turn
-
 end
