@@ -59,19 +59,6 @@ function split(x,y)
 end
 
 
-
-function initialShot()
-
-    -- start all the bullets somewhere - not yet sure if code needed
-    for i=1, numOfBullets do
-        x1a[i] = shipX
-        y1a[i] = shipY
-        setBulletsInitialVelocities(1,1,i)
-    end
-
-end
-
-
 function shotType1()
 
     -- shoot only one bullet

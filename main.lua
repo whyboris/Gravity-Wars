@@ -12,9 +12,11 @@ require "touch"
 function love.load()
 
     -- math.randomseed(42)  -- goes out of bounds
-    math.randomseed(232) -- shot comes close to opponent // with `initialShot()` it hits the opponent
+    math.randomseed(232) -- shot comes close to opponent
 
     setVariables() -- globals.lua
+
+    love.window.setMode(WIDTH, HEIGHT)
 
     canvas = love.graphics.newCanvas(WIDTH, HEIGHT)
 
@@ -22,22 +24,10 @@ function love.load()
     --     love.graphics.setBlendMode("alpha") -- what does this do ?!??
     -- love.graphics.setCanvas()
 
-    love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.rectangle('line',20,20,20,20)
-
-    love.window.setMode(WIDTH,HEIGHT)
-
     newGame()
 
-    -- set location from where bullet will be shot
-    shipX = player1.x
-    shipY = player1.y
-
-
-    -- TODO: fix problem that without first shot the prorgram gives an error
-    -- choose a shot:
-    shotType3()
-    -- initialShot()
+    bulType = 3
+    playerPressedShootButton() -- disable this to let the player take the first shot
 
 end
 

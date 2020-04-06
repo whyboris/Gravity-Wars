@@ -49,7 +49,7 @@ function setVariables()
     turn = 1
 
     -- used to end the turn sometime
-    shotInProgress = true
+    shotInProgress = false
 
     -- temporary variable - add up all the x locations of shots; if == 0, end turn
     progressCheck = 1
