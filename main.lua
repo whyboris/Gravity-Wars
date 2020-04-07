@@ -27,7 +27,7 @@ function love.load()
 
     newGame()
 
-    bulType = 3
+    bulType = 2
     -- playerPressedShootButton() -- disable this to let the player take the first shot
 
 end
@@ -93,13 +93,13 @@ function love.draw()
 
     -- this code here WILL dim the trails continuously when explosion occurs
     -- works too fast so I can slow it down by dimming every 5th frame (temp int)
-    if benign < 0 then dimTrails() end
+    -- if benign < 0 then dimTrails() end
 
     -- drawUI() -- maybe do not draw continuously ?
 
     -- starts dimming the playing field more aggressively
     if endOfRound == true then
-        dimTrails()
+        -- dimTrails()
         -- love.graphics.setColor(0,0,0,1)
         -- love.graphics.rectangle('fill',-1,-1,WIDTH+5,HEIGHT+5)
     end
@@ -114,8 +114,10 @@ function love.draw()
 
         if turn == 1 then
             drawPlayerAngleAndForce(player1)
+            drawAngleDiff(player1, 0)
         else
             drawPlayerAngleAndForce(player2)
+            drawAngleDiff(player2, 1)
         end
 
         love.graphics.setCanvas()
@@ -159,5 +161,35 @@ function drawPlayerAngleAndForce(playerN)
     love.graphics.line(playerN.x, playerN.y,
                         playerN.x + math.cos(0.0174533 * playerN.angle) * 100,
                         playerN.y + math.sin(0.0174533 * playerN.angle) * 100)
+
+end
+
+
+function drawAngleDiff(playerN, playerOffsetHack)
+
+    angleDiff = playerN.angle - playerN.lastAngle
+
+    if angleDiff > 180 then
+        angleDiff = angleDiff - 360
+    end
+
+    if angleDiff < -180 then
+        angleDiff = angleDiff + 360
+    end
+
+    if angleDiff < 10 and angleDiff > -10 then
+
+        xOffset = playerN.x - 74 + playerOffsetHack * 90
+
+        love.graphics.setColor(0, 0, 0, 0.5)
+        love.graphics.rectangle('fill', xOffset, player1.y - 6, 60, 12)
+
+        love.graphics.setColor(1, 1, 1, (10 - math.abs(angleDiff))/10)
+
+        love.graphics.setNewFont("basis33.ttf", 16)
+        love.graphics.printf(string.format("%.5f", angleDiff), xOffset, playerN.y - 7, 60, 'right')
+
+        love.graphics.setColor(1, 1, 1, 1)
+    end
 
 end

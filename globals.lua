@@ -3,6 +3,10 @@
 ----------------------------------------------------------------------------------------------------
 function setVariables()
 
+    -- load graphics
+    ss1 = love.graphics.newImage('ss1.png')
+    ss2 = love.graphics.newImage('ss2.png')
+
     WIDTH = 1000
     HEIGHT = 800
 
@@ -34,7 +38,8 @@ function setVariables()
         angle = 45,
         force = 1.5,
         lives = 3,
-        health = 100
+        health = 100,
+        lastAngle = 45,
     }
 
     player2 = {
@@ -43,7 +48,8 @@ function setVariables()
         angle = 225,
         force = 1.5,
         lives = 3,
-        health = 100
+        health = 100,
+        lastAngle = 225,
     }
 
     -- whose turn

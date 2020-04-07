@@ -75,7 +75,7 @@ end
 function shotType2()
 
     -- shoot three bullets
-    numOfBullets = 3
+    numOfBullets = 30
 
     for i = 1, numOfBullets do
         allBullets[i] = {}
@@ -128,6 +128,9 @@ function playerPressedShootButton()
         shipX = player2.x
         shipY = player2.y
     end
+
+    player1.lastAngle = player1.angle
+    player2.lastAngle = player2.angle
 
     allBullets = {} -- reset to empty
 

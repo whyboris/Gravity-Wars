@@ -70,10 +70,12 @@ function drawUI()
 
     -- draw the current player's force and angle
     if turn == 1 then
+        love.graphics.setNewFont(12)
         love.graphics.printf(string.format("%.5f", player1.force), 20, 22, 75,
                              'right')
         love.graphics.printf(string.format("%.5f", 360 - player1.angle), 20, 62, 75,
                              'right')
+
     elseif turn == 2 then
         love.graphics.printf(string.format("%.5f", player2.force), 20, 22, 75,
                              'right')
@@ -85,9 +87,14 @@ end
 
 function drawShips()
 
-    love.graphics.setColor(1, 0.6, 0.6, 1)
-    love.graphics.ellipse('fill', player1.x, player1.y, 8, 8)
-    love.graphics.ellipse('fill', player2.x, player2.y, 8, 8)
+    -- love.graphics.setColor(1, 0.6, 0.6, 1)
+    -- love.graphics.ellipse('fill', player1.x, player1.y, 8, 8)
+    -- love.graphics.ellipse('fill', player2.x, player2.y, 8, 8)
+
+    love.graphics.draw(ss1, player1.x - 4, player1.y - 4)
+    love.graphics.draw(ss2, player2.x - 4, player2.y - 4)
+
+    -- love.graphics.draw(ss1, player1.x, player1.y, player1.angle, 1, 1, 4, 4)
 
 end
 
