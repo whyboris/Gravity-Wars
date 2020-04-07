@@ -72,12 +72,12 @@ function drawUI()
     if turn == 1 then
         love.graphics.printf(string.format("%.5f", player1.force), 20, 22, 75,
                              'right')
-        love.graphics.printf(string.format("%.5f", player1.angle), 20, 62, 75,
+        love.graphics.printf(string.format("%.5f", 360 - player1.angle), 20, 62, 75,
                              'right')
     elseif turn == 2 then
         love.graphics.printf(string.format("%.5f", player2.force), 20, 22, 75,
                              'right')
-        love.graphics.printf(string.format("%.5f", player2.angle), 20, 62, 75,
+        love.graphics.printf(string.format("%.5f", 360 - player2.angle), 20, 62, 75,
                              'right')
     end
 
@@ -102,7 +102,7 @@ function dimTrails()
     print("dimTrails EXECUTED")
 
     love.graphics.setCanvas(canvas)
-    love.graphics.setColor(0, 0, 0, 0.1) -- don't fortget to reset ?
+    love.graphics.setColor(0, 0, 0, 0.15) -- don't fortget to reset ?
     love.graphics.rectangle('fill', 0, 0, WIDTH, HEIGHT)
     love.graphics.setColor(1, 1, 1, 1) -- reset back !?
     drawPlanets() -- execute inside `canvas` ?!
