@@ -169,6 +169,8 @@ function drawAngleDiff(playerN, playerOffsetHack)
 
     angleDiff = playerN.angle - playerN.lastAngle
 
+    forceDiff = playerN.force - playerN.lastForce
+
     if angleDiff > 180 then
         angleDiff = angleDiff - 360
     end
@@ -179,15 +181,18 @@ function drawAngleDiff(playerN, playerOffsetHack)
 
     if angleDiff < 10 and angleDiff > -10 then
 
-        xOffset = playerN.x - 74 + playerOffsetHack * 90
+        xOffset = playerN.x - 76 + playerOffsetHack * 90
 
         love.graphics.setColor(0, 0, 0, 0.5)
-        love.graphics.rectangle('fill', xOffset, player1.y - 6, 60, 12)
+        love.graphics.rectangle('fill', xOffset, player1.y - 6, 60, 24)
 
         love.graphics.setColor(1, 1, 1, (10 - math.abs(angleDiff))/10)
 
         love.graphics.setNewFont("basis33.ttf", 16)
         love.graphics.printf(string.format("%.5f", angleDiff), xOffset, playerN.y - 7, 60, 'right')
+
+        love.graphics.setColor(1, 0, 0, (10 - math.abs(angleDiff))/10)
+        love.graphics.printf(string.format("%.5f", forceDiff), xOffset, playerN.y + 5, 60, 'right')
 
         love.graphics.setColor(1, 1, 1, 1)
     end

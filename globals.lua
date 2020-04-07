@@ -40,6 +40,7 @@ function setVariables()
         lives = 3,
         health = 100,
         lastAngle = 45,
+        lastForce = 1.5,
     }
 
     player2 = {
@@ -50,6 +51,7 @@ function setVariables()
         lives = 3,
         health = 100,
         lastAngle = 225,
+        lastForce = 1.5,
     }
 
     -- whose turn

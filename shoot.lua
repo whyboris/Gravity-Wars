@@ -132,6 +132,9 @@ function playerPressedShootButton()
     player1.lastAngle = player1.angle
     player2.lastAngle = player2.angle
 
+    player1.lastForce = player1.force
+    player2.lastForce = player2.force
+
     allBullets = {} -- reset to empty
 
     -- make bullet benign
