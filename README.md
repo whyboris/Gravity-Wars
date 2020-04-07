@@ -20,3 +20,5 @@ The initial commit code is a very quick and dirty port of my 2015 prototype code
 ## License
 
 Please feel free to use this code (in full or in part) however you'd like, under the permissive _MIT_ license.
+
+Thank you to Manchson for the _MIT_ licensed [`basis33.ttf`](https://github.com/Manchson/basis33) font.
