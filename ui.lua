@@ -11,13 +11,6 @@ function drawUI()
     love.graphics.line(10, 10, 10, 720)
     love.graphics.line(10, 10, WIDTH - 10, 10)
 
-    -- region for touch stuff
-    love.graphics.line(10, 50, 410, 50)
-    love.graphics.line(10, 90, 410, 90)
-
-    love.graphics.line(110, 10, 110, 90)
-    love.graphics.line(410, 10, 410, 90)
-
     -- shoot BUTTON rectangle -- change states while shot in progress
     if shotInProgress == true then
         love.graphics.setColor(0.5, 0, 0, 1)

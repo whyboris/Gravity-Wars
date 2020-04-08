@@ -191,21 +191,25 @@ function drawAngleDiff(playerN, playerOffsetHack)
         xOffset = playerN.x - 76 + playerOffsetHack * 90
 
         fontOpacity = math.pow((10 - math.abs(angleDiff))/10, 0.5)
-
-        love.graphics.setColor(0, 0, 0, 0.5)
-        love.graphics.rectangle('fill', xOffset, player1.y - 6, 60, 24)
-
-        love.graphics.setColor(1, 1, 1, fontOpacity)
-
         love.graphics.setFont(pixelFont)
 
         if (angleDiff ~= 0) then
+            -- rectangle
+            love.graphics.setColor(0, 0, 0, 0.5)
+            love.graphics.rectangle('fill', xOffset + 5, playerN.y - 6, 56, 12, 4, 4)
+            -- text
+            love.graphics.setColor(1, 1, 1, fontOpacity)
             love.graphics.printf(string.format("%.5f", angleDiff), xOffset, playerN.y - 7, 60, 'right')
         end
 
         love.graphics.setColor(1, 0, 0, fontOpacity)
 
         if (forceDiff ~= 0) then
+            -- rectangle
+            love.graphics.setColor(0, 0, 0, 0.5)
+            love.graphics.rectangle('fill', xOffset + 5, playerN.y + 6, 56, 12, 4, 4)
+            -- text
+            love.graphics.setColor(1, 0, 0, fontOpacity)
             love.graphics.printf(string.format("%.5f", forceDiff), xOffset, playerN.y + 5, 60, 'right')
         end
 

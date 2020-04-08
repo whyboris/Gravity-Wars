@@ -25,6 +25,16 @@ function newGame()
 
 end
 
+-- returns `player1` or `player2` table (object) depending on whose turn it is
+function currentPlayer()
+
+    if turn == 1 then
+        return player1
+    else
+        return player2
+    end
+end
+
 -- Randomize placement of planets & ships
 -- check for overlap, retry if check fails
 function setInitialPositions()

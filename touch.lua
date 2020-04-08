@@ -13,18 +13,46 @@ function love.mousepressed(x, y, button)
     end
     ]] --
 
-    if (x > (WIDTH - 100) and y < 100) then
-        if shotInProgress == false then playerPressedShootButton() end
-    elseif (x > 50 and x < 410 and y > 0 and y < 50) then
-        mouseXinitial = x
-        draggingType = 'force'
-        dragging = true
-    elseif (x > 50 and x < 410 and y > 50 and y < 110) then
-        mouseXinitial = x
-        draggingType = 'angle'
-        dragging = true
+    if shotInProgress == false and (x > (WIDTH - 100) and y < 100) then
+        playerPressedShootButton()
     end
+
+    if shotInProgress == false then
+        clickNearShip = nearShip(x, y, currentPlayer())
+
+        if clickNearShip == 'force' then
+            print('force')
+            mouseXinitial = x
+            draggingType = 'force'
+            dragging = true
+        elseif clickNearShip == 'angle' then
+            print('angle')
+            mouseXinitial = x
+            draggingType = 'angle'
+            dragging = true
+        end
+
+    end
+
 end
+
+-- returns 'force', 'angle', 'no'
+function nearShip(x, y, playerN)
+
+    forceOffset = 100 * playerN.force / 5
+
+    distance = math.pow(math.pow((playerN.x - x), 2) + math.pow((playerN.y - y), 2), 0.5)
+
+    if distance < math.min(math.max(10, forceOffset), 90) then
+        return 'force'
+    elseif distance < 100 then
+        return 'angle'
+    else
+        return 'no'
+    end
+
+end
+
 
 -- short circuit the love.update function with boolean
 function love.mousereleased(x, y, button) dragging = false end
