@@ -7,15 +7,15 @@
 -- f - force            additional to player's chosen force,
 -- t - theta (angle)    additional to player's chosen angle,
 -- bulletIndex - index of the bullet
-function setBulletsInitialVelocities(f, t, bulletIndex)
+function setBulletInitialVelocity(f, t, bulletIndex)
 
     if turn == 1 then
         -- preturb it by a bit for jitter so it's not the same
-        f = player1.force + f + math.random() * 2
-        t = player1.angle + t + math.random() * 10
+        f = player1.force + f -- + math.random() * 2
+        t = player1.angle + t -- + math.random() * 10
     elseif turn == 2 then
-        f = player2.force + f + math.random() * 2
-        t = player2.angle + t + math.random() * 10
+        f = player2.force + f -- + math.random() * 2
+        t = player2.angle + t -- + math.random() * 10
     end
 
     -- *** REDUCE THE FORCE BY some amount and reduce weight of planets by some amount
@@ -25,10 +25,6 @@ function setBulletsInitialVelocities(f, t, bulletIndex)
     -- calculate the x and y components of shot for initial force
     allBullets[bulletIndex].vx = f * math.cos(0.0174533 * t)
     allBullets[bulletIndex].vy = f * math.sin(0.0174533 * t)
-
-    -- to test what's going on
-    -- print("force = ", f)
-    -- print("angle = ", t)
 
 end
 
@@ -53,7 +49,7 @@ function split(x, y)
 
     for i = 1, 3 do
         temp = numOfBullets - 3 + i
-        setBulletsInitialVelocities(0.01, math.random(0, 360), temp)
+        setBulletInitialVelocity(0.01, math.random(0, 360), temp)
     end
 
 end
@@ -67,7 +63,7 @@ function shotType1()
         allBullets[i] = {}
         allBullets[i].x = shipX
         allBullets[i].y = shipY
-        setBulletsInitialVelocities(1, 1, i)
+        setBulletInitialVelocity(1, 1, i)
     end
 
 end
@@ -81,7 +77,7 @@ function shotType2()
         allBullets[i] = {}
         allBullets[i].x = shipX
         allBullets[i].y = shipY
-        setBulletsInitialVelocities(1, 1, i)
+        setBulletInitialVelocity(1, 1, i)
     end
 
 end
@@ -95,7 +91,7 @@ function shotType3()
         allBullets[i] = {}
         allBullets[i].x = shipX
         allBullets[i].y = shipY
-        setBulletsInitialVelocities(1, 1, i)
+        setBulletInitialVelocity(1, 1, i)
     end
 
 end
@@ -109,7 +105,7 @@ function shotType4()
         allBullets[i] = {}
         allBullets[i].x = shipX
         allBullets[i].y = shipY
-        setBulletsInitialVelocities(1, 1, i)
+        setBulletInitialVelocity(1, 1, i)
     end
 
 end
@@ -151,7 +147,7 @@ function playerPressedShootButton()
             allBullets[i] = {}
             allBullets[i].x = shipX
             allBullets[i].y = shipY
-            setBulletsInitialVelocities(2, 2, i)
+            setBulletInitialVelocity(2, 2, i)
         end
     end
 
@@ -194,7 +190,7 @@ function explode(x, y)
 
     for i = 1, 10 do
         temp = numOfBullets - 10 + i
-        setBulletsInitialVelocities(0.01, math.random(0, 360), temp)
+        setBulletInitialVelocity(0.01, math.random(0, 360), temp)
     end
 
 end

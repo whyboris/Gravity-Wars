@@ -11,7 +11,7 @@ require "touch"
 function love.load()
 
     -- math.randomseed(42)  -- goes out of bounds
-    math.randomseed(232) -- shot comes close to opponent; set `shotType3()` numOfBullets to 15 to hit opponent
+    -- math.randomseed(232) -- shot comes close to opponent; set `shotType3()` numOfBullets to 15 to hit opponent
 
     setVariables() -- globals.lua
 
@@ -27,7 +27,7 @@ function love.load()
 
     newGame()
 
-    bulType = 2
+    bulType = 1
     -- playerPressedShootButton() -- disable this to let the player take the first shot
 
 end
