@@ -118,14 +118,14 @@ function love.draw()
             if player1.lastAngle ~= nil then
                 drawAngleDiff(player1, 0)
             end
+            drawForceAndAngle(player1, 1)
         else
             drawPlayerAngleAndForce(player2)
             if player2.lastAngle ~= nil then
                 drawAngleDiff(player2, 1)
             end
+            drawForceAndAngle(player2, 2)
         end
-
-        drawForceAndAngle()
 
         love.graphics.setCanvas()
         love.graphics.draw(canvas2)

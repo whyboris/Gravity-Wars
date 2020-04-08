@@ -66,44 +66,34 @@ function drawUI()
 
 end
 
-function drawForceAndAngle()
+function drawForceAndAngle(playerN, tempHack)
 
-    angleX = player1.x - 140
-    forceX = player1.x - 140
-
-    angleY = player1.y + 78
-    forceY = player1.y + 90
-
-    -- region for angle & force
-    love.graphics.setColor(0, 0, 0, 0.7)
-    love.graphics.rectangle('fill', angleX + 12, angleY + 2, 70, 13, 4, 4)
-    love.graphics.rectangle('fill', forceX + 24, forceY + 3, 66, 12, 4, 4)
-    love.graphics.setColor(1, 1, 1, 1)
-
-    -- draw the current player's force and angle
-    if turn == 1 then
-        love.graphics.setColor(1, 0, 0, 1)
-        love.graphics.setFont(pixelFont, 20)
-        love.graphics.print('GJ', forceX + 76, forceY + 2) -- GigaJoules
-
-        -- love.graphics.setFont(uiFont)
-        love.graphics.printf(string.format("%.5f", player1.force), forceX, forceY + 2, 75,
-                             'right')
-
-        love.graphics.setColor(1, 1, 1, 1)
-        love.graphics.printf(string.format("%.5f", 360 - player1.angle), forceX, angleY + 2, 75,
-                            'right')
-        love.graphics.ellipse('line', angleX + 78, angleY + 5, 2, 2)
-
-
-    elseif turn == 2 then
-        love.graphics.setFont(uiFont)
-        love.graphics.printf(string.format("%.5f", player2.force), 20, 22, 75,
-                             'right')
-        love.graphics.printf(string.format("%.5f", 360 - player2.angle), 20, 62, 75,
-                             'right')
+    -- different offset depending on player
+    if tempHack == 1 then
+        xOffset = playerN.x - 140
+        angleY = playerN.y + 80
+        forceY = playerN.y + 92
+    else
+        xOffset = playerN.x + 55
+        angleY = playerN.y + 78
+        forceY = playerN.y + 90
     end
 
+    -- black background behind angle and force
+    love.graphics.setColor(0, 0, 0, 0.7)
+    love.graphics.rectangle('fill', xOffset + 12, angleY, 70, 13, 4, 4)
+    love.graphics.rectangle('fill', xOffset + 24, forceY + 1, 66, 12, 4, 4)
+
+    -- print force (red)
+    love.graphics.setColor(1, 0, 0, 1)
+    love.graphics.setFont(pixelFont, 20)
+    love.graphics.print('GJ', xOffset + 76, forceY) -- GigaJoules
+    love.graphics.printf(string.format("%.5f", playerN.force), xOffset, forceY, 75, 'right')
+
+    -- print angle (white)
+    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.printf(string.format("%.5f", 360 - playerN.angle), xOffset, angleY, 75, 'right')
+    love.graphics.ellipse('line', xOffset + 78, angleY + 3, 2, 2)
 
 end
 
