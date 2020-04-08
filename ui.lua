@@ -76,8 +76,8 @@ function drawForceAndAngle()
 
     -- region for angle & force
     love.graphics.setColor(0, 0, 0, 0.7)
-    love.graphics.rectangle('fill', forceX, forceY, 80, 20)
-    love.graphics.rectangle('fill', angleX, angleY, 80, 20)
+    love.graphics.rectangle('fill', angleX + 12, angleY + 2, 70, 13, 4, 4)
+    love.graphics.rectangle('fill', forceX + 24, forceY + 3, 66, 12, 4, 4)
     love.graphics.setColor(1, 1, 1, 1)
 
     -- draw the current player's force and angle
