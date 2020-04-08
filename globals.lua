@@ -5,6 +5,7 @@ function setVariables()
 
     pixelFont = love.graphics.newFont("basis33.ttf", 16)
     uiFont = love.graphics.getFont()
+    dragCursor = love.mouse.getSystemCursor("sizewe")
 
     -- load graphics
     ss1 = love.graphics.newImage('ss1.png')

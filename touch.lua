@@ -21,15 +21,15 @@ function love.mousepressed(x, y, button)
         clickNearShip = nearShip(x, y, currentPlayer())
 
         if clickNearShip == 'force' then
-            print('force')
             mouseXinitial = x
             draggingType = 'force'
             dragging = true
+            love.mouse.setCursor(dragCursor)
         elseif clickNearShip == 'angle' then
-            print('angle')
             mouseXinitial = x
             draggingType = 'angle'
             dragging = true
+            love.mouse.setCursor(dragCursor)
         end
 
     end
@@ -55,7 +55,10 @@ end
 
 
 -- short circuit the love.update function with boolean
-function love.mousereleased(x, y, button) dragging = false end
+function love.mousereleased(x, y, button)
+    dragging = false
+    love.mouse.setCursor()
+end
 
 -- if the mouse is being dragged after clicking, update the values of force or angle
 -- uses distance from initial click for smoothly
@@ -64,7 +67,7 @@ function love.update(dt)
 
         mouseXcurrent = love.mouse.getX()
 
-        if mousXinitial ~= mouseXcurrent then
+        if mouseXinitial ~= mouseXcurrent then
 
             diff = mouseXcurrent - mouseXinitial
 
