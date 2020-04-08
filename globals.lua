@@ -3,6 +3,9 @@
 ----------------------------------------------------------------------------------------------------
 function setVariables()
 
+    pixelFont = love.graphics.newFont("basis33.ttf", 16)
+    uiFont = love.graphics.getFont()
+
     -- load graphics
     ss1 = love.graphics.newImage('ss1.png')
     ss2 = love.graphics.newImage('ss2.png')

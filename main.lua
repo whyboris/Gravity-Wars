@@ -12,6 +12,7 @@ function love.load()
 
     -- math.randomseed(42)  -- goes out of bounds
     -- math.randomseed(232) -- shot comes close to opponent; set `shotType3()` numOfBullets to 15 to hit opponent
+    math.randomseed(os.time()) -- randomize map every time
 
     setVariables() -- globals.lua
 
@@ -194,7 +195,7 @@ function drawAngleDiff(playerN, playerOffsetHack)
 
         love.graphics.setColor(1, 1, 1, fontOpacity)
 
-        love.graphics.setNewFont("basis33.ttf", 16)
+        love.graphics.setFont(pixelFont)
         love.graphics.printf(string.format("%.5f", angleDiff), xOffset, playerN.y - 7, 60, 'right')
 
         love.graphics.setColor(1, 0, 0, fontOpacity)
