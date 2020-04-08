@@ -2,7 +2,7 @@
 
 Need to implement:
 
-- UI for choosing angle & force for shot as well as the "shoot" button
+- Improve UI
 - Every draw method should start with its own `setColor`
 - Create a helper method for `setColor`
 - Render all shot trails to one canvas, render ships, planets, and UI to another canvas. Update independently as needed
@@ -19,6 +19,7 @@ It may be fun to have a variety of shot types that can be used. Here are some id
 - four corners (shoot 4 bullets at 90 degrees to each other)
 - octoshot (shoot 8 bullets at 45 degrees to each other)
 - planet exploder (makes a planet disappear)
+- tracers (many in all directions, expire after some time, can not kill)
 
 Multi shots
 
@@ -36,3 +37,5 @@ Not shots but would be used instead of firing a shot
 - teleport to a random location
 - spacequake (moves all planets randomly a bit)
 - draw vector field (overlay a grid of benign bullets and make them draw for 3 iterations)
+- summon asteroids
+- quitter (starts new map, but opponent has 3 shots before you)
