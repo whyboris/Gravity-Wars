@@ -114,10 +114,14 @@ function love.draw()
 
         if turn == 1 then
             drawPlayerAngleAndForce(player1)
-            drawAngleDiff(player1, 0)
+            if player1.lastAngle ~= nil then
+                drawAngleDiff(player1, 0)
+            end
         else
             drawPlayerAngleAndForce(player2)
-            drawAngleDiff(player2, 1)
+            if player2.lastAngle ~= nil then
+                drawAngleDiff(player2, 1)
+            end
         end
 
         love.graphics.setCanvas()

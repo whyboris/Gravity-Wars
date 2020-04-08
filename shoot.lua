@@ -124,16 +124,14 @@ function playerPressedShootButton()
     if turn == 1 then
         shipX = player1.x
         shipY = player1.y
+        player1.lastAngle = player1.angle
+        player1.lastForce = player1.force
     elseif turn == 2 then
         shipX = player2.x
         shipY = player2.y
+        player2.lastAngle = player2.angle
+        player2.lastForce = player2.force
     end
-
-    player1.lastAngle = player1.angle
-    player2.lastAngle = player2.angle
-
-    player1.lastForce = player1.force
-    player2.lastForce = player2.force
 
     allBullets = {} -- reset to empty
 

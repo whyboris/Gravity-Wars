@@ -5,15 +5,21 @@ function newGame()
 
     setInitialPositions()
 
+    player1.angle = 0
+    player2.angle = 180
+
+    player1.lastAngle = nil
+    player2.lastAngle = nil
+
+    player1.health = 100
+    player2.health = 100
+
     love.graphics.setCanvas(canvas)
     love.graphics.clear()
     drawPlanets()
     drawShips()
     drawUI()
     love.graphics.setCanvas()
-
-    player1.health = 100
-    player2.health = 100
 
     print("New Game Started")
 

@@ -35,23 +35,23 @@ function setVariables()
     player1 = {
         x = 100,
         y = 100,
-        angle = 45,
+        angle = 0,
         force = 1.5,
         lives = 3,
         health = 100,
-        lastAngle = 45,
-        lastForce = 1.5,
+        lastAngle = nil,
+        lastForce = nil,
     }
 
     player2 = {
         x = 500,
         y = 500,
-        angle = 225,
+        angle = 180,
         force = 1.5,
         lives = 3,
         health = 100,
-        lastAngle = 225,
-        lastForce = 1.5,
+        lastAngle = nil,
+        lastForce = nil,
     }
 
     -- whose turn
