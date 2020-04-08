@@ -18,9 +18,9 @@ function love.load()
 
     love.window.setMode(WIDTH, HEIGHT)
 
-    canvas = love.graphics.newCanvas(WIDTH, HEIGHT)
+    canvas = love.graphics.newCanvas(WIDTH, HEIGHT,  { msaa = 2 })
 
-    canvas2 = love.graphics.newCanvas(WIDTH, HEIGHT)
+    canvas2 = love.graphics.newCanvas(WIDTH, HEIGHT,  { msaa = 2 })
 
     -- love.graphics.setCanvas(canvas)
     --     love.graphics.setBlendMode("alpha") -- what does this do ?!??
@@ -125,6 +125,8 @@ function love.draw()
             end
         end
 
+        drawForceAndAngle()
+
         love.graphics.setCanvas()
         love.graphics.draw(canvas2)
 
@@ -172,7 +174,7 @@ end
 
 function drawAngleDiff(playerN, playerOffsetHack)
 
-    angleDiff = playerN.angle - playerN.lastAngle
+    angleDiff = playerN.lastAngle - playerN.angle
 
     forceDiff = playerN.force - playerN.lastForce
 
@@ -196,10 +198,16 @@ function drawAngleDiff(playerN, playerOffsetHack)
         love.graphics.setColor(1, 1, 1, fontOpacity)
 
         love.graphics.setFont(pixelFont)
-        love.graphics.printf(string.format("%.5f", angleDiff), xOffset, playerN.y - 7, 60, 'right')
+
+        if (angleDiff ~= 0) then
+            love.graphics.printf(string.format("%.5f", angleDiff), xOffset, playerN.y - 7, 60, 'right')
+        end
 
         love.graphics.setColor(1, 0, 0, fontOpacity)
-        love.graphics.printf(string.format("%.5f", forceDiff), xOffset, playerN.y + 5, 60, 'right')
+
+        if (forceDiff ~= 0) then
+            love.graphics.printf(string.format("%.5f", forceDiff), xOffset, playerN.y + 5, 60, 'right')
+        end
 
         love.graphics.setColor(1, 1, 1, 1)
     end

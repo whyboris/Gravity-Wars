@@ -62,19 +62,39 @@ function drawUI()
                                 300 - 300 * ((player2.health) / 100), 10)
     end
 
+    love.graphics.setColor(1, 1, 1, 1)
+
+end
+
+function drawForceAndAngle()
+
+    angleX = player1.x - 140
+    forceX = player1.x - 140
+
+    angleY = player1.y + 78
+    forceY = player1.y + 90
+
     -- region for angle & force
-    love.graphics.setColor(16 / 255, 178 / 255, 197 / 255, 1)
-    love.graphics.rectangle('fill', 20, 60, 80, 20)
-    love.graphics.rectangle('fill', 20, 20, 80, 20)
+    love.graphics.setColor(0, 0, 0, 0.7)
+    love.graphics.rectangle('fill', forceX, forceY, 80, 20)
+    love.graphics.rectangle('fill', angleX, angleY, 80, 20)
     love.graphics.setColor(1, 1, 1, 1)
 
     -- draw the current player's force and angle
     if turn == 1 then
-        love.graphics.setFont(uiFont)
-        love.graphics.printf(string.format("%.5f", player1.force), 20, 22, 75,
+        love.graphics.setColor(1, 0, 0, 1)
+        love.graphics.setFont(pixelFont, 20)
+        love.graphics.print('GJ', forceX + 76, forceY + 2) -- GigaJoules
+
+        -- love.graphics.setFont(uiFont)
+        love.graphics.printf(string.format("%.5f", player1.force), forceX, forceY + 2, 75,
                              'right')
-        love.graphics.printf(string.format("%.5f", 360 - player1.angle), 20, 62, 75,
-                             'right')
+
+        love.graphics.setColor(1, 1, 1, 1)
+        love.graphics.printf(string.format("%.5f", 360 - player1.angle), forceX, angleY + 2, 75,
+                            'right')
+        love.graphics.ellipse('line', angleX + 78, angleY + 5, 2, 2)
+
 
     elseif turn == 2 then
         love.graphics.setFont(uiFont)
@@ -84,7 +104,9 @@ function drawUI()
                              'right')
     end
 
+
 end
+
 
 function drawShips()
 
