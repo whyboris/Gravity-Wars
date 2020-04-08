@@ -13,7 +13,7 @@ function love.mousepressed(x, y, button)
     end
     ]] --
 
-    if shotInProgress == false and (x > (WIDTH - 100) and y < 100) then
+    if shotInProgress == false and (x > (WIDTH - 100) and y > HEIGHT - 100) then
         playerPressedShootButton()
     end
 

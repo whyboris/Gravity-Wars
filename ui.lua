@@ -5,53 +5,58 @@ function drawUI()
 
     love.graphics.setColor(1, 1, 1, 1)
 
-    -- bounding box
-    love.graphics.line(10, 720, WIDTH - 10, 720)
-    love.graphics.line(WIDTH - 10, 10, WIDTH - 10, 720)
-    love.graphics.line(10, 10, 10, 720)
-    love.graphics.line(10, 10, WIDTH - 10, 10)
+    love.graphics.line(10, 0, WIDTH - 10, 0)
+
+    -- bounding box (order: TRBL)
+    love.graphics.line(10,         32,          WIDTH - 10, 32         )
+    love.graphics.line(WIDTH - 10, 0,           WIDTH - 10, HEIGHT - 10)
+    love.graphics.line(10,         HEIGHT - 10, WIDTH - 10, HEIGHT - 10)
+    love.graphics.line(10,         0,           10,         HEIGHT - 10)
 
     -- shoot BUTTON rectangle -- change states while shot in progress
     if shotInProgress == true then
         love.graphics.setColor(0.5, 0, 0, 1)
-        love.graphics.ellipse('fill', WIDTH - 50, 50, 30, 30)
+        love.graphics.ellipse('fill', WIDTH - 50, HEIGHT - 50, 30, 30)
     else
         love.graphics.setColor(16 / 255, 178 / 255, 197 / 255, 1)
-        love.graphics.ellipse('fill', WIDTH - 50, 50, 30, 30)
+        love.graphics.ellipse('fill', WIDTH - 50, HEIGHT - 50, 30, 30)
     end
 
     -- draw how many lives each has
     love.graphics.setColor(1, 1, 0, 1)
     for i = 1, player1.lives do
         love.graphics
-            .ellipse('fill', WIDTH / 2 + 35 + 20 * i, HEIGHT - 32, 8, 8)
+            .ellipse('fill', WIDTH / 2 + 35 + 20 * i, 16, 8, 8)
     end
 
     for i = 1, player2.lives do
         love.graphics
-            .ellipse('fill', WIDTH / 2 - 35 - 20 * i, HEIGHT - 32, 8, 8)
+            .ellipse('fill', WIDTH / 2 - 35 - 20 * i, 16, 8, 8)
     end
+
+
+    topOffset = 10
 
     -- right health bar
     love.graphics.setColor((255 - player1.health * 2.55) / 255, 1, 0, 1)
-    love.graphics.rectangle('fill', WIDTH / 2 + 50, HEIGHT - 20, 300, 10)
+    love.graphics.rectangle('fill', WIDTH / 2 + 150, topOffset, 300, 10)
 
     if player1.health < 100 then
         love.graphics.setColor(223 / 255, (45 + player1.health) / 255,
                                (45 + player1.health) / 255, 1)
-        love.graphics.rectangle('fill', (WIDTH / 2 + 50) + 300 - 300 *
-                                    ((100 - player1.health) / 100), HEIGHT - 20,
+        love.graphics.rectangle('fill', (WIDTH / 2 + 150) + 300 - 300 *
+                                    ((100 - player1.health) / 100), topOffset,
                                 300 - 300 * ((player1.health) / 100), 10)
     end
 
     -- left health bar
     love.graphics.setColor((255 - player2.health * 2.55) / 255, 1, 0, 1)
-    love.graphics.rectangle('fill', WIDTH / 2 - 350, HEIGHT - 20, 300, 10)
+    love.graphics.rectangle('fill', WIDTH / 2 - 450, topOffset, 300, 10)
 
     if player2.health < 100 then
         love.graphics.setColor(224 / 255, (45 + player2.health) / 255,
                                (45 + player2.health) / 255, 1)
-        love.graphics.rectangle('fill', (WIDTH / 2 - 350), HEIGHT - 20,
+        love.graphics.rectangle('fill', (WIDTH / 2 - 450), topOffset,
                                 300 - 300 * ((player2.health) / 100), 10)
     end
 
