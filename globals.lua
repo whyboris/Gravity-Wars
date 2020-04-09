@@ -1,15 +1,19 @@
 ----------------------------------------------------------------------------------------------------
 -- Code setting up all the global variables to be used
 ----------------------------------------------------------------------------------------------------
+function loadExternalAssets()
+
+    ss1 = love.graphics.newImage("assets/ss1.png")
+    ss2 = love.graphics.newImage("assets/ss2.png")
+    pixelFont = love.graphics.newFont("assets/basis33.ttf", 16)
+
+end
+
 function setVariables()
 
-    pixelFont = love.graphics.newFont("basis33.ttf", 16)
-    uiFont = love.graphics.getFont()
-    dragCursor = love.mouse.getSystemCursor("sizewe")
+    uiFont = love.graphics.getFont() -- default font
 
-    -- load graphics
-    ss1 = love.graphics.newImage('ss1.png')
-    ss2 = love.graphics.newImage('ss2.png')
+    dragCursor = love.mouse.getSystemCursor("sizewe")
 
     WIDTH = 1000
     HEIGHT = 800
