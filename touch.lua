@@ -95,6 +95,12 @@ function love.update(dt)
 
         end
     end
+
+    -- if shotInProgress == false then
+    --     if keyUp then
+    --         player1.force = player1.force * 1.01
+    --     end
+    -- end
 end
 
 function getForce(playerN, diff)
