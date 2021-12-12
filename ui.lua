@@ -5,13 +5,9 @@ function drawUI()
 
     love.graphics.setColor(1, 1, 1, 1)
 
-    love.graphics.line(10, 0, WIDTH - 10, 0)
-
-    -- bounding box (order: TRBL)
-    love.graphics.line(10,         32,          WIDTH - 10, 32         )
-    love.graphics.line(WIDTH - 10, 0,           WIDTH - 10, HEIGHT - 10)
-    love.graphics.line(10,         HEIGHT - 10, WIDTH - 10, HEIGHT - 10)
-    love.graphics.line(10,         0,           10,         HEIGHT - 10)
+    -- rectangle for health bars and around play area
+    love.graphics.rectangle('line', 2, 2, WIDTH - 4, 30)
+    love.graphics.rectangle('line', 2, 32, WIDTH - 4, HEIGHT - 34)
 
     drawShootButton()
 
