@@ -43,7 +43,7 @@ function nearShip(x, y, playerN)
 
     distance = math.pow(math.pow((playerN.x - x), 2) + math.pow((playerN.y - y), 2), 0.5)
 
-    if distance < math.min(math.max(10, forceOffset), 90) then
+    if distance < clamp(forceOffset, 10, 90) then
         return 'force'
     elseif distance < 100 then
         return 'angle'
