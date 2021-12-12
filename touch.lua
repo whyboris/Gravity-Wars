@@ -122,7 +122,7 @@ function getAngle(playerN, diff)
 
 end
 
--- make the input value never go above min or max
+-- make the input value never go below min or above max
 function clamp(value, min, max)
 
     return math.max(math.min(value, max), min)
