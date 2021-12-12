@@ -6,6 +6,7 @@ require "ui"
 require "shoot"
 require "logic"
 require "touch"
+require "keyboard"
 
 -- Use this function to perform your initial setup
 function love.load()

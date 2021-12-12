@@ -126,8 +126,11 @@ function collisonCheck(b)
     if benign > 50 then
         didYouHitPlayer(player1, b)
         didYouHitPlayer(player2, b)
-        updateHealthBar(player1, player2, b)
-        updateHealthBar(player2, player1, b)
+        if turn == 1 then
+            updateHealthBar(player2, player1, b)
+        else
+            updateHealthBar(player1, player2, b)
+        end
     end
 
 end
@@ -143,10 +146,19 @@ function didYouHitPlayer(playerN, b)
         if endOfRound == false then playerN.lives = playerN.lives - 1 end
 
         endOfRound = true
-        -- explode this location !!!
-        love.graphics.ellipse('line', playerN.x, playerN.y, 15, 15)
-        explode(allBullets[b].x, allBullets[b].y)
+        
         playerN.health = 0
+        
+        -- store location where player is
+        explodeX = playerN.x
+        explodeY = playerN.y
+        
+        -- hide player from the board
+        playerN.x = -100
+        playerN.y = -100
+        
+        -- explode this location !!!
+        explode(explodeX, explodeY)
 
         if playerN.lives == 0 then print("GAME OVER, SOMEONE WON!") end
     end
@@ -178,7 +190,7 @@ end
 
 --[[
 
-THE MOST IMPORTANT FUNCTION - draws the lines for the shot "b" where b is the shot name
+THE MOST IMPORTANT FUNCTION - draws the lines for the shot "b" where b (think "bullet") is the shot name
 
 1) if shot is outside some boundary, discard it
 2) if the shot is outside drawing area, compute, but don't draw (TODO: this is not implemented yet)
