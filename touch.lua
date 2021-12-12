@@ -105,13 +105,13 @@ end
 
 function getForce(playerN, diff)
 
-    return math.max(math.min(playerN.force + math.pow(diff / 1000, 3), 5), 0)
+    return clamp(playerN.force + clamp(math.pow(diff / 1000, 3), -0.02, 0.02), 0, 5)
 
 end
 
 function getAngle(playerN, diff)
 
-    angle = playerN.angle + math.pow(diff / 200, 3)
+    angle = playerN.angle + clamp(math.pow(diff / 200, 3), -1, 1)
     if angle > 360 then
         angle = angle - 360
     elseif angle < 0 then
@@ -122,3 +122,9 @@ function getAngle(playerN, diff)
 
 end
 
+-- make the input value never go above min or max
+function clamp(value, min, max)
+
+    return math.max(math.min(value, max), min)
+
+end
