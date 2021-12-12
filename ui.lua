@@ -34,6 +34,14 @@ function drawUI()
             .ellipse('fill', WIDTH / 2 - 35 - 20 * i, 16, 8, 8)
     end
 
+    drawHealthBars()
+
+    love.graphics.setColor(1, 1, 1, 1)
+
+end
+
+function drawHealthBars()
+
     topOffset = 10
 
     barWidth = WIDTH / 2 - 200
@@ -60,8 +68,6 @@ function drawUI()
         love.graphics.rectangle('fill', (WIDTH / 2 - barWidth - 150), topOffset,
                                 barWidth - barWidth * ((player2.health) / 100), 10)
     end
-
-    love.graphics.setColor(1, 1, 1, 1)
 
 end
 
@@ -98,6 +104,10 @@ end
 
 
 function drawShips()
+
+    -- in the user interface (top left and top right)
+    love.graphics.draw(ss1, 24, 11)
+    love.graphics.draw(ss2, WIDTH - 32, 11)
 
     -- love.graphics.setColor(1, 0.6, 0.6, 1)
     -- love.graphics.ellipse('fill', player1.x, player1.y, 8, 8)
