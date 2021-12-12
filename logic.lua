@@ -178,7 +178,7 @@ end
 
 --[[
 
-THE MOST IMPORTANT FUNCTION - draws the lines for the shot "b" where b is the shot name
+THE MOST IMPORTANT FUNCTION - draws the lines for the shot "b" where b (think "bullet") is the shot name
 
 1) if shot is outside some boundary, discard it
 2) if the shot is outside drawing area, compute, but don't draw (TODO: this is not implemented yet)

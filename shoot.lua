@@ -165,32 +165,48 @@ end
 function explode(x, y)
 
     benign = -100
-
-    love.graphics.setCanvas(canvas)
-    love.graphics.ellipse('line', x, y, 10, 10)
-    love.graphics.setColor(200 / 255, 20 / 255, 20 / 255, 1)
-    love.graphics.setCanvas()
-
+       
     -- print("EXPLOSION @ ", x, y)
 
     -- add the bullets, don't use existing ones!!!
     -- might keep re-using the 10 bullets I create if hits again - not sure ***
-
+    
     temp = 0
-
+    
+    love.graphics.setCanvas(canvas)
+ 
     for i = 1, 10 do
         temp = numOfBullets + i
         allBullets[temp] = {}
-        allBullets[temp].x = x
-        allBullets[temp].y = y
+
+        randX = math.random(-20, 20)
+        randY = math.random(-20, 20)
+
+        radius = math.random(5, 15)
+        setExplodyColor()
+        love.graphics.ellipse('fill', x + randX, y + randY, radius, radius)
+
+        allBullets[temp].x = x + randX
+        allBullets[temp].y = y + randY
     end
+
+    love.graphics.setCanvas()
 
     numOfBullets = numOfBullets + 10
     temp = 0
 
     for i = 1, 10 do
         temp = numOfBullets - 10 + i
-        setBulletInitialVelocity(0.01, math.random(0, 360), temp)
+        setBulletInitialVelocity(1, math.random(0, 360), temp)
     end
 
+end
+
+function setExplodyColor()
+
+    -- red     1    0     0
+    -- orange  1    0.5   0
+    -- yellow  1    1     0
+
+    love.graphics.setColor(1, math.random(0, 255) / 255, 0, 1)
 end

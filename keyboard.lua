@@ -20,6 +20,23 @@ function love.keypressed(key)
     if key == 'down' then
         keyDown = true
     end
+
+    if key == 'x' then
+        explode(400, 300)
+    end
+
+    if key == 'n' then
+        newGame()
+    end
+
+    if key == 'space' then
+        playerPressedShootButton()
+    end
+
+    if key == 'escape' then
+        os.exit()
+    end
+
 end
 
 function love.keyreleased(key)
