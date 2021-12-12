@@ -159,18 +159,9 @@ function playerPressedShootButton()
 
 end
 
--- should write a better function: one that explodes a SHIP not a location!
-
--- function takes x,y location and blows up that spot
+-- blow up a location in a pretty way
 function explode(x, y)
-
-    benign = -100
-       
-    -- print("EXPLOSION @ ", x, y)
-
-    -- add the bullets, don't use existing ones!!!
-    -- might keep re-using the 10 bullets I create if hits again - not sure ***
-    
+   
     temp = 0
     
     love.graphics.setCanvas(canvas)

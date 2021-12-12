@@ -102,8 +102,13 @@ function drawShips()
     -- love.graphics.ellipse('fill', player1.x, player1.y, 8, 8)
     -- love.graphics.ellipse('fill', player2.x, player2.y, 8, 8)
 
-    love.graphics.draw(ss1, player1.x - 4, player1.y - 4)
-    love.graphics.draw(ss2, player2.x - 4, player2.y - 4)
+    if player1.health > 0 then
+        love.graphics.draw(ss1, player1.x - 4, player1.y - 4)
+    end
+    
+    if player2.health > 0 then
+        love.graphics.draw(ss2, player2.x - 4, player2.y - 4)
+    end
 
     -- love.graphics.draw(ss1, player1.x, player1.y, player1.angle, 1, 1, 4, 4)
 

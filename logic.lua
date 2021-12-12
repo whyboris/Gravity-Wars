@@ -143,10 +143,19 @@ function didYouHitPlayer(playerN, b)
         if endOfRound == false then playerN.lives = playerN.lives - 1 end
 
         endOfRound = true
-        -- explode this location !!!
-        love.graphics.ellipse('line', playerN.x, playerN.y, 15, 15)
-        explode(allBullets[b].x, allBullets[b].y)
+        
         playerN.health = 0
+        
+        -- store location where player is
+        explodeX = playerN.x
+        explodeY = playerN.y
+        
+        -- hide player from the board
+        playerN.x = -100
+        playerN.y = -100
+        
+        -- explode this location !!!
+        explode(explodeX, explodeY)
 
         if playerN.lives == 0 then print("GAME OVER, SOMEONE WON!") end
     end
