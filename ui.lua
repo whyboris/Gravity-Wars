@@ -13,7 +13,19 @@ function drawUI()
     love.graphics.line(10,         HEIGHT - 10, WIDTH - 10, HEIGHT - 10)
     love.graphics.line(10,         0,           10,         HEIGHT - 10)
 
-    -- shoot BUTTON rectangle -- change states while shot in progress
+    drawShootButton()
+
+    drawLives()
+
+    drawHealthBars()
+
+    love.graphics.setColor(1, 1, 1, 1)
+
+end
+
+-- shoot BUTTON rectangle -- change states while shot in progress
+function drawShootButton()
+
     if shotInProgress == true then
         love.graphics.setColor(0.5, 0, 0, 1)
         love.graphics.ellipse('fill', WIDTH - 50, HEIGHT - 50, 30, 30)
@@ -22,7 +34,11 @@ function drawUI()
         love.graphics.ellipse('fill', WIDTH - 50, HEIGHT - 50, 30, 30)
     end
 
-    -- draw how many lives each has
+end
+
+-- draw how many lives each has
+function drawLives()
+
     love.graphics.setColor(1, 1, 0, 1)
     for i = 1, player1.lives do
         love.graphics
@@ -34,12 +50,9 @@ function drawUI()
             .ellipse('fill', WIDTH / 2 - 35 - 20 * i, 16, 8, 8)
     end
 
-    drawHealthBars()
-
-    love.graphics.setColor(1, 1, 1, 1)
-
 end
 
+-- draw health bars - responsive depending on WIDTH
 function drawHealthBars()
 
     topOffset = 10
