@@ -13,6 +13,7 @@ function love.mousepressed(x, y, button)
     end
     ]] --
 
+    -- rectangle on bottom-right to detect pressing shoot button
     if shotInProgress == false and (x > (WIDTH - 100) and y > HEIGHT - 100) then
         playerPressedShootButton()
     end
