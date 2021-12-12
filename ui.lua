@@ -34,30 +34,31 @@ function drawUI()
             .ellipse('fill', WIDTH / 2 - 35 - 20 * i, 16, 8, 8)
     end
 
-
     topOffset = 10
+
+    barWidth = WIDTH / 2 - 200
 
     -- right health bar
     love.graphics.setColor((255 - player1.health * 2.55) / 255, 1, 0, 1)
-    love.graphics.rectangle('fill', WIDTH / 2 + 150, topOffset, 300, 10)
+    love.graphics.rectangle('fill', WIDTH / 2 + 150, topOffset, barWidth, 10)
 
     if player1.health < 100 then
         love.graphics.setColor(223 / 255, (45 + player1.health) / 255,
                                (45 + player1.health) / 255, 1)
-        love.graphics.rectangle('fill', (WIDTH / 2 + 150) + 300 - 300 *
+        love.graphics.rectangle('fill', (WIDTH / 2 + 150) + barWidth - barWidth *
                                     ((100 - player1.health) / 100), topOffset,
-                                300 - 300 * ((player1.health) / 100), 10)
+                                barWidth - barWidth * ((player1.health) / 100), 10)
     end
 
     -- left health bar
     love.graphics.setColor((255 - player2.health * 2.55) / 255, 1, 0, 1)
-    love.graphics.rectangle('fill', WIDTH / 2 - 450, topOffset, 300, 10)
+    love.graphics.rectangle('fill', WIDTH / 2 - barWidth - 150, topOffset, barWidth, 10)
 
     if player2.health < 100 then
         love.graphics.setColor(224 / 255, (45 + player2.health) / 255,
                                (45 + player2.health) / 255, 1)
-        love.graphics.rectangle('fill', (WIDTH / 2 - 450), topOffset,
-                                300 - 300 * ((player2.health) / 100), 10)
+        love.graphics.rectangle('fill', (WIDTH / 2 - barWidth - 150), topOffset,
+                                barWidth - barWidth * ((player2.health) / 100), 10)
     end
 
     love.graphics.setColor(1, 1, 1, 1)
