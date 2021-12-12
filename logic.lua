@@ -126,8 +126,11 @@ function collisonCheck(b)
     if benign > 50 then
         didYouHitPlayer(player1, b)
         didYouHitPlayer(player2, b)
-        updateHealthBar(player1, player2, b)
-        updateHealthBar(player2, player1, b)
+        if turn == 1 then
+            updateHealthBar(player2, player1, b)
+        else
+            updateHealthBar(player1, player2, b)
+        end
     end
 
 end
