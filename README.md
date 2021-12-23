@@ -10,7 +10,7 @@ _Gravity Wars_ is not my original idea. In 2007 I played a 1992 MAC version of t
 
 In 2015 I tried to re-create the game for the iPad using [Codea](https://codea.io/) but lost interest. I finally got around to sharing my code for it in [2019](https://codea.io/talk/discussion/9563/gravity-wars-giving-away-my-code-on-unfinished-game).
 
-In 2020 a co-worker shared [LÖVE](https://love2d.org/) (aka _Love2D_) which like Codea uses the *Lua* programming language. I decided to port over my code to _LÖVE_ so as to share this fun game with more people.
+In 2020 a co-worker shared [LÖVE](https://love2d.org/) (aka _Love2D_) which, like Codea, uses the *Lua* programming language. I decided to port over my code to _LÖVE_ so as to share this fun game with more people.
 
 The initial commit code is a very quick and dirty port of my 2015 prototype code, which in turn is a quick and dirty port of my 2009 self-taught code. In subsequent commits I improved the code somewhat, but I wouldn't say the current codebase is a good example of how to code well.
 
